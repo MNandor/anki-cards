@@ -1,0 +1,15 @@
+.card {
+  font-family: arial;
+  font-size: 20px;
+  text-align: center;
+  color: black;
+  background-color: white;
+}
+
+#main {
+border: 1px solid red;
+}
+
+#mainDone{
+border: 1px solid green;
+}

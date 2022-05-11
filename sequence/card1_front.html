@@ -1,0 +1,41 @@
+<h1>{{Title}}</h1>
+
+<div id="main" onclick="showNext()">
+Javascript didn't run right.
+</div>
+
+<div id="dummy" style="display: none">
+{{Data}}
+</div>
+
+<script>
+
+// what the user sees
+mainDiv = document.getElementById("main")
+
+// Use of dummy is required so that innerHTML gets pictures as <img> tags
+dummyDiv = document.getElementById("dummy")
+
+data = dummyDiv.innerHTML
+data = data.split("#answer")
+
+// which section to show next
+next = 0
+
+
+function showNext(){
+	// get rid of unnecessary newlines
+	while (data[next].startsWith("<br>")){
+		data[next] = data[next].substring(4)
+	}
+	
+	mainDiv.innerHTML=data[next]
+	next += 1
+	next = next%data.length
+}
+
+
+showNext()
+
+
+</script>
