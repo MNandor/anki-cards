@@ -1,0 +1,40 @@
+<div class="cardinfo">Română → Deutsch</div>
+<span class="word">{{Romanian}}</span>
+<br>
+{{#Context_Romanian}}
+{{hint:Context_Romanian}}
+{{/Context_Romanian}}
+
+<script>
+
+
+var wordFields = document.getElementsByClassName("word");
+
+for (var i=0; i<wordFields.length; i++){
+	var wordF = wordFields[i];
+	var wordT = wordF.innerHTML;
+
+
+	var keyword = "{{SpeechPart}}".toLowerCase()
+
+	if (keyword == "p" || keyword == "phrase")
+		wordF.classList.add('phrase');
+
+	else if (keyword == "v" || keyword == "verb")
+		wordF.classList.add('verb');
+
+	else if (keyword == "a" || keyword == "adj" || keyword == "adjective")
+		wordF.classList.add('adjective');
+
+	else if (keyword == "n" || keyword == "noun"){
+		if (RegExp("^der .*die").test(wordT) || RegExp("^un .*doi").test(wordT))
+			wordF.classList.add('masculine');
+		else if (RegExp("^die .*die").test(wordT) || RegExp("^o .*două").test(wordT))
+			wordF.classList.add('feminine');
+		else if (RegExp("^das .*die").test(wordT) || RegExp("^un .*două").test(wordT))
+			wordF.classList.add('neuter');
+	}
+
+}
+
+</script> 

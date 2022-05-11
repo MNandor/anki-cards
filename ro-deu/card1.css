@@ -1,0 +1,60 @@
+
+.card {
+  font-family: arial;
+  font-size: 36px;
+  text-align: center;
+  color: black;
+  background-color: white;
+}
+
+.cardinfo {
+	font-size: 16px;
+}
+
+.phrase {
+	color: #00FF00;
+}
+
+.mobile .phrase {
+	color: #FF00FF;
+}
+
+.verb {
+	color: #FF0000;
+}
+
+.mobile .verb {
+	color: #00FFFF;
+}
+
+.adjective {
+	color: #FFFF00;
+}
+
+.mobile .adjective {
+	color: #0000FF;
+}
+
+.masculine {
+	color: #0000FF;
+}
+
+.mobile .masculine {
+	color: #FFFF00;
+}
+
+.feminine {
+	color: #FF00FF;
+}
+
+.mobile .feminine {
+	color: #00FF00;
+}
+
+.neuter {
+	color: #00FFFF;
+}
+
+.mobile .neuter {
+	color: #FF0000;
+}
