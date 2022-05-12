@@ -1,0 +1,78 @@
+
+<div id="titletext">{{Title}}</div>
+
+<div id="cgroupdata">{{Data}}</div>
+
+<script>
+
+
+// Helpers
+
+String.prototype.hashCode = function() {
+    var hash = 0;
+    if (this.length == 0) {
+        return hash;
+    }
+    for (var i = 0; i < this.length; i++) {
+        var char = this.charCodeAt(i);
+        hash = ((hash<<5)-hash)+char;
+        hash = hash & hash; // Convert to 32bit integer
+    }
+    return hash;
+}
+
+function hslToHex(h, s, l) {
+	l /= 100;
+	const a = s * Math.min(l, 1 - l) / 100;
+	const f = n => {
+		const k = (n + h / 30) % 12;
+		const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+		// convert to Hex and prefix "0" if needed
+		return Math.round(255 * color).toString(16).padStart(2, '0');
+	};
+	return `#${f(0)}${f(8)}${f(4)}`;
+}
+
+today = new Date().toISOString().slice(0, 10)
+function predictableSort(a, b) {
+	return (a+b+today).hashCode()%2;
+}
+
+function myMain() {
+	upperDiv = document.getElementById("cgroupdata");
+
+	lines = upperDiv.innerText.split('\n')
+
+	lefts = [];
+	rights = [];
+
+
+	lines.sort(predictableSort)
+
+	for (let i = 0; i < lines.length; i++){
+		lefts.push(lines[i].split('-')[0])
+		rights.push(lines[i].split('-')[1])
+	}
+
+
+
+	for (let i = 0; i < lines.length; i++){
+		var hash = (rights[i]+today).hashCode();
+		var hue = Math.abs(hash)%359+1;
+		var color = hslToHex(hue, 100, 50);
+		rights[i]="<font color="+color+">"+rights[i]+"</font>"
+	}
+
+	let result = ""
+	for (let i = 0; i < lines.length; i++){
+		result+="<span class=\"changeable\">"+lefts[i]+": </span> "+rights[i] +"<br>"
+	}
+
+	
+	upperDiv.innerHTML = result
+
+}
+
+myMain()
+
+</script>
