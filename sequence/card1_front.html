@@ -32,6 +32,9 @@ function showNext(){
 	mainDiv.innerHTML=data[next]
 	next += 1
 	next = next%data.length
+	if (next == 0){
+		mainDiv.style="border: 2px solid gold"
+	}
 }
 
 
