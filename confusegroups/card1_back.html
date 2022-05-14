@@ -1,4 +1,3 @@
-
 <div id="titletext">{{Title}}</div>
 
 <div id="cgroupdata">{{Data}}</div>
@@ -41,7 +40,7 @@ function predictableSort(a, b) {
 function myMain() {
 	upperDiv = document.getElementById("cgroupdata");
 
-	lines = upperDiv.innerText.split('\n')
+	lines = upperDiv.innerHTML.split("<br>")
 
 	lefts = [];
 	rights = [];
@@ -50,10 +49,19 @@ function myMain() {
 	lines.sort(predictableSort)
 
 	for (let i = 0; i < lines.length; i++){
-		lefts.push(lines[i].split('-')[0])
-		rights.push(lines[i].split('-')[1])
-	}
 
+		// If there's just one dash in the line, it separates left and right side
+		// If there are multiple, only count double dash as a separator
+		// Note: there might be hidden dashes in included pictures. Use --		
+		let separator = "-"
+		let dashCount = (lines[i].match(/-/g) || []).length;
+		if (dashCount != 1){
+			separator = "--"
+		}
+
+		lefts.push(lines[i].split(separator)[0])
+		rights.push(lines[i].split(separator)[1])
+	}
 
 
 	for (let i = 0; i < lines.length; i++){
