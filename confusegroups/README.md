@@ -8,6 +8,12 @@ Click on any of the answers (right side of the data) to reveal which question it
 
 ## How to Get
 
+### Importable Deck
+
+1. Go to the [Releases](https://github.com/MNandor/anki-cards/releases) page and find the newest version of ConfuseGroups.
+2. Save the `.apkg` file
+3. In Anki, File/Import and select the file
+
 ### Manual
 
 (instructions are for Desktop Anki - but the card type works on AnkiDroid, too)
