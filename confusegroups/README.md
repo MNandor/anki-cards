@@ -6,6 +6,21 @@ This is achieved by using Javascript to randomize the order of question-answer p
 
 Click on any of the answers (right side of the data) to reveal which question it belongs to.
 
+## How to Get
+
+### Manual
+
+(instructions are for Desktop Anki - but the card type works on AnkiDroid, too)
+
+1. Create a new Note type: Tools / Manage Note Types / Add
+2. Give it the required fields: Tools / Manage Note Types / (Select the type you just created) / Fields
+3. It needs a `Title` and a `Data` field. You might also want to add a `Mnemonic` field, as well as any additional fields you might want to use.
+4. Click on Cards... and edit it as follows
+  5. Copy `card1_front.html` into Front Template
+  6. Copy `card1_back.html` into Back Template
+  7. Copy `card1.css` into Styling
+8. You're done! You can create cards with this template now!
+
 ## Example
 
 Type the following into the "Data" field:
