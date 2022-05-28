@@ -14,7 +14,12 @@ function revealClickable(clickable){
 
 	for (let i = 0; i < lines.length; i++){
 		if (rights[i].indexOf(">"+txx+"<") != -1){ 
-			document.getElementsByClassName("changeable")[i].innerHTML += tx;
+				if (document.getElementsByClassName("changeable")[i].innerHTML.indexOf("___") != -1){
+					document.getElementsByClassName("changeable")[i].innerHTML = document.getElementsByClassName("changeable")[i].innerHTML.replace("___", tx)
+
+				} else {
+					document.getElementsByClassName("changeable")[i].innerHTML += tx;
+				}
 		}
 	}
 }
@@ -93,7 +98,12 @@ function myMain() {
 
 	let result = ""
 	for (let i = 0; i < lines.length; i++){
-		result+="<span class=\"changeable\">"+lefts[i]+": </span> "+"<br>"
+		if (lefts[i].indexOf("___") != -1){
+			result+="<span class=\"changeable\">"+lefts[i]+"</span> "+"<br>"
+		}
+		else{
+			result+="<span class=\"changeable\">"+lefts[i]+": </span> "+"<br>"
+		}
 	}
 
 

@@ -73,7 +73,11 @@ function myMain() {
 
 	let result = ""
 	for (let i = 0; i < lines.length; i++){
-		result+="<span class=\"changeable\">"+lefts[i]+": </span> "+rights[i] +"<br>"
+		if (lefts[i].indexOf("___") != -1){
+			result+="<span class=\"changeable\">"+lefts[i].replace("___", rights[i])+"</span><br>"
+		} else {
+			result+="<span class=\"changeable\">"+lefts[i]+": </span> "+rights[i] +"<br>"
+		}
 	}
 
 	
