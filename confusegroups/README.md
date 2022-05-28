@@ -14,7 +14,7 @@ Click on any of the answers (right side of the data) to reveal which question it
 
 1. Create a new Note type: Tools / Manage Note Types / Add
 2. Give it the required fields: Tools / Manage Note Types / (Select the type you just created) / Fields
-3. It needs a `Title` and a `Data` field. You might also want to add a `Mnemonic` field, as well as any additional fields you might want to use.
+3. It needs a `Title`, `Data`, and a `Mnemonic` field. You can also add any additional fields you might want to use.
 4. Click on Cards... and edit it as follows
   5. Copy `card1_front.html` into Front Template
   6. Copy `card1_back.html` into Back Template
