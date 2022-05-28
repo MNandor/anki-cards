@@ -42,6 +42,18 @@ Would result in this card:
 
 ![alt text](cloze-and-dashes.gif)
 
+## Pictures
+
+You can paste pictures directly into Anki's editor and they will work.
+
+Input this:
+
+![alt text](example-pictures.png)
+
+To get this card:
+
+![alt text](example-pictures.gif)
+
 ## Dashes in Text?
 
 Dashes `-` are used to separate the question and answer part. If you want to have dashes inside your text, then you need to use two dashes `--` as a separator instead.
