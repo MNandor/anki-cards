@@ -1,0 +1,16 @@
+.card {
+  font-family: arial;
+  font-size: 20px;
+  text-align: center;
+  color: black;
+  background-color: white;
+}
+
+.isKanji{
+	color: teal;;
+	/*text-decoration: underline;*/
+}
+
+#content{
+	font-size: 36px;
+}
