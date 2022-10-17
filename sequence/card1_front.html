@@ -24,9 +24,12 @@ if (data.includes("#together")){
 	data = data.replace("#together", "").trim()
 	addTogether = true
 	mainDiv.innerText = ""
+	data = data.split("<br>");
+	data.shift()
+} else {
+	data = data.split("#answer")
 }
 
-data = data.split("#answer")
 
 // which section to show next
 next = 0
@@ -39,7 +42,7 @@ function showNext(){
 	}
 	
 	if (addTogether){
-		mainDiv.innerHTML+=data[next]	
+		mainDiv.innerHTML+=data[next]+"<br>"
 	}
 	else {
 		mainDiv.innerHTML=data[next]
