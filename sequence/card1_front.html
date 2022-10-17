@@ -17,6 +17,15 @@ mainDiv = document.getElementById("main")
 dummyDiv = document.getElementById("dummy")
 
 data = dummyDiv.innerHTML
+
+// if #together, then keep previous content without overriding
+addTogether = false
+if (data.includes("#together")){
+	data = data.replace("#together", "").trim()
+	addTogether = true
+	mainDiv.innerText = ""
+}
+
 data = data.split("#answer")
 
 // which section to show next
@@ -29,7 +38,13 @@ function showNext(){
 		data[next] = data[next].substring(4)
 	}
 	
-	mainDiv.innerHTML=data[next]
+	if (addTogether){
+		mainDiv.innerHTML+=data[next]	
+	}
+	else {
+		mainDiv.innerHTML=data[next]
+	}
+
 	next += 1
 	next = next%data.length
 	if (next == 0){
