@@ -20,6 +20,14 @@ data = dummyDiv.innerHTML
 
 // if #together, then keep previous content without overriding
 addTogether = false
+lineByLine = false
+
+// use newlines as separator
+if (data.includes("#linebyline")){
+	lineByLine = true
+	data = data.replace("#linebyline", "").trim()
+}
+
 if (data.includes("#together")){
 	data = data.replace("#together", "").trim()
 	addTogether = true

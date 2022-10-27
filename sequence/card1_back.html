@@ -11,6 +11,10 @@
 
 mainDiv = document.getElementById("mainDone")
 
-mainDiv.innerHTML = mainDiv.innerHTML.replaceAll("#answer", "<hr>")
+mainDiv.innerHTML = mainDiv.innerHTML.replaceAll("#answer", "")
+mainDiv.innerHTML = mainDiv.innerHTML.replaceAll("#together", "")
+if (mainDiv.innerHTML.trim().startsWith("<br>")){
+	mainDiv.innerHTML = mainDiv.innerHTML.replace("<br>", "") //just the first
+}
 
 </script>
