@@ -52,7 +52,10 @@ function myMain() {
 	rights = [];
 
 
-	lines.sort(predictableSort)
+	title=document.getElementById("titletext").innerText;
+	if (!title.endsWith("Sequence")){
+			lines.sort(predictableSort)
+	}
 
 	for (let i = 0; i < lines.length; i++){
 
