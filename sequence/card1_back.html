@@ -13,6 +13,7 @@ mainDiv = document.getElementById("mainDone")
 
 mainDiv.innerHTML = mainDiv.innerHTML.replaceAll("#answer", "")
 mainDiv.innerHTML = mainDiv.innerHTML.replaceAll("#together", "")
+mainDiv.innerHTML = mainDiv.innerHTML.replaceAll("#linebyline", "")
 if (mainDiv.innerHTML.trim().startsWith("<br>")){
 	mainDiv.innerHTML = mainDiv.innerHTML.replace("<br>", "") //just the first
 }
