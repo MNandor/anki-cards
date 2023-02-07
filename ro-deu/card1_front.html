@@ -49,6 +49,9 @@ dat = "<svg width=\"10mm\" height=\"10mm\" viewBox=\"0 0 10 10\" xmlns=\"http://
 gen = "<svg width=\"10mm\" height=\"10mm\" viewBox=\"0 0 10 10\" xmlns=\"http://www.w3.org/2000/svg\"><circle style=\"fill:none;stroke:#fff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:1.74161;stroke-opacity:1\" cx=\"5\" cy=\"5\" r=\"3.839\"/><path style=\"fill:none;stroke:#fff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1\" d=\"M5 1v8M9 5H1\"/></svg>"
 voc = "<svg width=\"10mm\" height=\"10mm\" viewBox=\"0 0 10 10\" xmlns=\"http://www.w3.org/2000/svg\"><circle style=\"fill:none;stroke:#fff;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:1.74161;stroke-opacity:1\" cx=\"5\" cy=\"5\" r=\"3.839\"/><g style=\"stroke-width:.850668\"><path style=\"fill:none;stroke:#fff;stroke-width:.850668;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1\" d=\"m-5 2.627 2.054 5.483M-.83 2.627-2.883 8.11\" transform=\"matrix(1.1858 0 0 1.16538 8.456 -.95)\"/></g></svg>"
 
+tra = "(transitive)"
+itr = "(intransitive)"
+
 
 
 var w = document.getElementById("word");
@@ -60,6 +63,8 @@ for (i in wl){
 	w.innerHTML = w.innerHTML.replaceAll("\\d", dat);
 	w.innerHTML = w.innerHTML.replaceAll("\\g", gen);
 	w.innerHTML = w.innerHTML.replaceAll("\\v", voc);
+	w.innerHTML = w.innerHTML.replaceAll("\\t", tra);
+	w.innerHTML = w.innerHTML.replaceAll("\\i", itr);
 }
 </script>
 
