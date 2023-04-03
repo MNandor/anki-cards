@@ -77,3 +77,13 @@ for (i in wl){
 	w.innerHTML = w.innerHTML.replaceAll("\\i", itr);
 }
 </script>
+
+<script>
+	var w = document.getElementsByClassName("word")[1];
+	var keyword = "{{SP}}".toLowerCase();
+
+	if (keyword == "v"){
+		w.innerHTML = w.innerHTML.replace(/^(ab|an|auf|aus|bei|ein|los|mit|nach|her|hin|vor|weg|zu|zurück)/, "$&-")
+	}
+
+</script>
