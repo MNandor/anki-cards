@@ -40,6 +40,8 @@ for (var i=0; i<wordFields.length; i++){
 			wordF.classList.add('feminine');
 		else if (RegExp("^das .*die").test(wordT) || RegExp("^un .*două").test(wordT))
 			wordF.classList.add('neuter');
+		else
+			wordF.classList.add('utrum');
 	}
 
 }
