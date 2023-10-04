@@ -64,3 +64,8 @@ svg{
 	margin-left: -8px;
 	margin-r
 }
+
+.hasContext {
+	font-size: .7em;
+	opacity: 70%;
+}

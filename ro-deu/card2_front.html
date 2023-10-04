@@ -1,7 +1,7 @@
 {{#Romanian}}
 <div class="cardinfo">Deutsch → Română</div>
 <div class="svgfriendly">
-<span class="word">{{German}}</span>
+<span class="word canHaveContext">{{German}}</span>
 <br>
 {{#Context_German}}
 {{hint:Context_German}}
@@ -10,7 +10,7 @@
 {{#Notes}}
 <hr>
 {{/Notes}}
-{{edit:Notes}}
+<span class="word canHaveContext">{{Notes}}</span>
 </div>
 <script>
 
@@ -71,6 +71,17 @@ for (i in wl){
 	w.innerHTML = w.innerHTML.replaceAll("\\t", tra);
 	w.innerHTML = w.innerHTML.replaceAll("\\i", itr);
 	break;
+}
+</script>
+
+<script>
+// makes text in parentheses smaller
+
+var spans = document.getElementsByClassName("canHaveContext");
+
+for (var i = 0; i < spans.length; i++) {
+    var span = spans[i];
+    span.innerHTML = span.innerHTML.replace(/\(([^)]+)\)/g, '<span class="hasContext">$&</span>');
 }
 </script>
 {{/Romanian}}

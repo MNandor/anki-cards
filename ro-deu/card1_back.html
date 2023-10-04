@@ -1,12 +1,12 @@
 <div class="cardinfo">Română → Deutsch</div>
 <div class="svgfriendly">
-<span class="word">{{Romanian}}</span>
+<span class="word canHaveContext">{{Romanian}}</span>
 <br>
 {{#Context_Romanian}}
 {{Context_Romanian}}
 {{/Context_Romanian}}
 <hr>
-<span class="word">{{German}}</span>
+<span class="word canHaveContext">{{German}}</span>
 <br>
 {{#Context_German}}
 {{Context_German}}
@@ -15,7 +15,7 @@
 {{#Notes}}
 <hr>
 {{/Notes}}
-{{edit:Notes}}
+<span class="canHaveContext">{{Notes}}</span>
 </div>
 <script>
 
@@ -86,4 +86,15 @@ for (i in wl){
 		w.innerHTML = w.innerHTML.replace(/^(ab|an|auf|aus|bei|ein|los|mit|nach|her|hin|vor|weg|zu|zurück)/, "$&-")
 	}
 
+</script>
+
+<script>
+// makes text in parentheses smaller
+
+var spans = document.getElementsByClassName("canHaveContext");
+
+for (var i = 0; i < spans.length; i++) {
+    var span = spans[i];
+    span.innerHTML = span.innerHTML.replace(/\(([^)]+)\)/g, '<span class="hasContext">$&</span>');
+}
 </script>
