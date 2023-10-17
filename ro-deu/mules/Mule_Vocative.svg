@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="10mm"
+   height="10mm"
+   viewBox="0 0 10 10"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20, custom)"
+   sodipodi:docname="vocative.svg"
+   inkscape:export-filename="Mule_Vocative.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#333333"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="true"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="11.306648"
+     inkscape:cx="14.416297"
+     inkscape:cy="19.236471"
+     inkscape:window-width="1920"
+     inkscape:window-height="1056"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:showpageshadow="0"
+     inkscape:deskcolor="#d1d1d1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="path846"
+       style="color:#000000;fill:#ffffff;stroke:#000000;stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:1.74161;stroke-opacity:1"
+       d="m 5.0002116,0.6619751 c -2.3901824,0 -4.33823649,1.9480541 -4.3382365,4.3382365 10e-9,2.3901824 1.9480541,4.3377197 4.3382365,4.3377197 2.3901824,0 4.3377197,-1.9475373 4.3377197,-4.3377197 0,-2.3901824 -1.9475373,-4.33823649 -4.3377197,-4.3382365 z m 0,0.999939 c 0.7009902,0 1.3493411,0.2141982 1.8851562,0.5803263 L 5.0007284,7.1856079 3.1155721,2.2412069 C 3.6511579,1.8755757 4.2997407,1.6619141 5.0002116,1.6619141 Z m 2.6732218,1.3348022 c 0.4174017,0.5572231 0.664559,1.2503189 0.664559,2.0034953 0,1.6223385 -1.1448289,2.9661676 -2.6742554,3.2721517 z M 2.3259562,2.9972331 4.3377197,8.2723633 C 2.8075467,7.9669544 1.6619141,6.6230769 1.6619141,5.0002116 c 0,-0.7529145 0.2469042,-1.4458547 0.6640421,-2.0029785 z" />
+  </g>
+</svg>
