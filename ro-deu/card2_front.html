@@ -11,13 +11,11 @@
 {{#English}}
 <hr>
 {{/English}}
-<span class="word canHaveContext">{{English}}</span>
+<span class = "word canHaveContext">{{English}}</span>
 </div>
 {{/German}}
 
 <script>
-
-
 var wordFields = document.getElementsByClassName("word");
 
 for (var i=0; i<wordFields.length; i++){
@@ -72,7 +70,6 @@ for (i in wl){
 	w.innerHTML = w.innerHTML.replaceAll("\\v", voc);
 	w.innerHTML = w.innerHTML.replaceAll("\\t", tra);
 	w.innerHTML = w.innerHTML.replaceAll("\\i", itr);
-	break;
 }
 </script>
 
