@@ -1,17 +1,17 @@
-{{Question}}
+<span class="smaller">{{Question}}</span>
 <br>
 <div id="quote">"{{Quote}}"</div>
 
 <hr>
 
-{{Book Title}} - {{Page Number}}
+<span class="smaller">{{Book Title}} - {{Page Number}}</span>
 
 {{edit:Mnemonic}}
 
 <script>
 quoteDiv = document.getElementById("quote");
-text = quoteDiv.innerText;
-modifiedText = text.replace(/\[[^\]]+\]/g, "[...]");
-quoteDiv.innerText = modifiedText;
+text = quoteDiv.innerHTML;
+modifiedText = text.replace(/\[[^\]]+\]/g, "<span class=\"shortened\">[...]</span>");
+quoteDiv.innerHTML = modifiedText;
 
 </script>

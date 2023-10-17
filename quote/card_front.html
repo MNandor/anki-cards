@@ -6,12 +6,12 @@
 
 <hr>
 
-{{Book Title}} - {{Page Number}}
+<span class="smaller">{{Book Title}} - {{Page Number}}</span>
 
 <script>
 quoteDiv = document.getElementById("quote");
-text = quoteDiv.innerText;
-modifiedText = text.replace(/\[[^\]]+\]/g, "[...]");
-quoteDiv.innerText = modifiedText;
+text = quoteDiv.innerHTML;
+modifiedText = text.replace(/\[[^\]]+\]/g, "<span class=\"shortened\">[...]</span>");
+quoteDiv.innerHTML = modifiedText;
 
 </script>

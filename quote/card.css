@@ -9,3 +9,11 @@
 .card.nightMode{
 	color: #e3cfb7;
 }
+
+.shortened {
+	opacity: .3;
+}
+
+.smaller {
+	font-size: .8em;
+}
