@@ -32,9 +32,13 @@ if (data.includes("#together")){
 	data = data.replace("#together", "").trim()
 	addTogether = true
 	mainDiv.innerText = ""
+} 
+
+if (lineByLine){
 	data = data.split("<br>");
 	data.shift()
-} else {
+}
+else {
 	data = data.split("#answer")
 }
 
