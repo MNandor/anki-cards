@@ -1,0 +1,17 @@
+{{Question}}
+<br>
+<div id="quote">"{{Quote}}"</div>
+
+<hr>
+
+{{Book Title}} - {{Page Number}}
+
+{{edit:Mnemonic}}
+
+<script>
+quoteDiv = document.getElementById("quote");
+text = quoteDiv.innerText;
+modifiedText = text.replace(/\[[^\]]+\]/g, "[...]");
+quoteDiv.innerText = modifiedText;
+
+</script>

@@ -1,0 +1,11 @@
+.card {
+    font-family: arial;
+    font-size: 20px;
+    text-align: center;
+    color: black;
+    background-color: #e3cfb7;
+}
+
+.card.nightMode{
+	color: #e3cfb7;
+}
