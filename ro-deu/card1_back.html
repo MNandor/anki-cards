@@ -1,29 +1,37 @@
-<div class="cardinfo">Română → Deutsch</div>
 <div class="svgfriendly">
+{{#Romanian}}
+
+<div class="cardinfo">Română → Deutsch</div>
+
 <span class="word canHaveContext">{{Romanian}}</span>
-<br>
 {{#Context_Romanian}}
+<br>
 {{Context_Romanian}}
 {{/Context_Romanian}}
+
+{{/Romanian}}
+{{^Romanian}}
+
+<div class="cardinfo">English → Deutsch</div>
+
+<span class = "word canHaveContext">{{English}}</span>
+
+{{/Romanian}}
+
+
 <hr>
 <span class="word canHaveContext">{{German}}</span>
-<br>
 {{#Context_German}}
+<br>
 {{Context_German}}
 {{/Context_German}}
 
-{{^Romanian}}
-{{#English}}
-<hr>
-{{/English}}
-<span class="word canHaveContext">{{English}}</span>
-{{/Romanian}}
+
 </div>
 
 {{edit:Mnemonic}}
+
 <script>
-
-
 var wordFields = document.getElementsByClassName("word");
 
 for (var i=0; i<wordFields.length; i++){

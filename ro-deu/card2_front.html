@@ -1,19 +1,29 @@
 {{#Romanian}}
-<div class="cardinfo">Deutsch → Română</div>
 <div class="svgfriendly">
+{{#German}}
+
+<div class="cardinfo">Deutsch → Română</div>
+
 <span class="word canHaveContext">{{German}}</span>
-<br>
 {{#Context_German}}
+<br>
 {{hint:Context_German}}
 {{/Context_German}}
 
-{{^German}}
-{{#English}}
-<hr>
-{{/English}}
-<span class = "word canHaveContext">{{English}}</span>
-</div>
 {{/German}}
+{{^German}}
+
+<div class="cardinfo">English → Română</div>
+
+<span class = "word canHaveContext">{{English}}</span>
+
+{{/German}}
+
+
+
+
+</div>
+
 
 <script>
 var wordFields = document.getElementsByClassName("word");
