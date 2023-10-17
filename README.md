@@ -3,6 +3,10 @@
 A collection of my different Anki card templates.
 `web`
 
+# Implementation Details
+
+(for nerds)
+
 ## On Mules
 
 You might notice I labeled some files as "mules".
@@ -19,3 +23,14 @@ I originally used this to write down any personal mnemonics that helped me memor
 
 To replicate this functionality, I recommend the [Edit Field During Review (Cloze)](https://ankiweb.net/shared/info/385888438) addon.
 Without the addon and on mobile, the Mnemonic field shows up as normal.
+
+## On Javascript persistence
+
+Many of my card templates use some form of Javascript.
+Whether said Javascript re-runs on a new card during review, and whether variables are carried over is sort of inconsistent between PC and mobile.
+This is why you might see some unnatural Javascript code, such as at variable declaration.
+
+## On Mobile Colors
+
+Once again, Anki is inconsistent between PC and mobile in how it handles dark mode and CSS colors.
+My cards have a .mobile CSS variants to get around this (to achieve a similar look across devices).
