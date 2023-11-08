@@ -51,11 +51,11 @@ function myMain() {
 	lefts = [];
 	rights = [];
 
-
 	title=document.getElementById("titletext").innerText;
 	if (!title.endsWith("Sequence")){
 			lines.sort(predictableSort)
 	}
+
 
 	for (let i = 0; i < lines.length; i++){
 
@@ -72,6 +72,7 @@ function myMain() {
 		rights.push(lines[i].split(separator)[1])
 	}
 
+	
 
 	for (let i = 0; i < lines.length; i++){
 		var hash = (rights[i]+today).hashCode();

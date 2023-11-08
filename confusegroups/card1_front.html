@@ -6,22 +6,20 @@
 
 <script>
 
-function revealClickable(clickable){
+function revealClickable(clickable, ind){
 	var tx = clickable.innerHTML.replace("<br>", "")
 	var txx = clickable.innerText.trim()
 
 	clickable.style.display = "none";
 
-	for (let i = 0; i < lines.length; i++){
-		if (rights[i].indexOf(">"+txx+"<") != -1){ 
-				if (document.getElementsByClassName("changeable")[i].innerHTML.indexOf("___") != -1){
-					document.getElementsByClassName("changeable")[i].innerHTML = document.getElementsByClassName("changeable")[i].innerHTML.replace("___", tx)
+	if (document.getElementsByClassName("changeable")[ind].innerHTML.indexOf("___") != -1){
+		document.getElementsByClassName("changeable")[ind].innerHTML = document.getElementsByClassName("changeable")[ind].innerHTML.replace("___", tx)
 
-				} else {
-					document.getElementsByClassName("changeable")[i].innerHTML += tx;
-				}
-		}
+	} else {
+		document.getElementsByClassName("changeable")[ind].innerHTML += tx;
 	}
+		
+	
 }
 
 // Helpers
@@ -103,8 +101,7 @@ function myMain() {
 	for (let i = 0; i < lines.length; i++){
 		if (lefts[i].indexOf("___") != -1){
 			result+="<span class=\"changeable\">"+lefts[i]+"</span> "+"<br>"
-		}
-		else{
+		} else {
 			result+="<span class=\"changeable\">"+lefts[i]+": </span> "+"<br>"
 		}
 	}
@@ -117,7 +114,8 @@ function myMain() {
 
 	clickables = ""
 	for (let i = 0; i < lines.length; i++){
-		clickables+="<span onclick=\"revealClickable(this)\">"+rs[i]+"<br></span>"
+		ind = rights.indexOf(rs[i])
+		clickables+="<span onclick=\"revealClickable(this, "+ind+")\">"+rs[i]+"<br></span>"
 	}
 
 	upperDiv.innerHTML = result
