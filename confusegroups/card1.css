@@ -14,3 +14,7 @@
 img {
 	max-height: 2em;
 }
+
+* {
+	white-space: nowrap;
+}
