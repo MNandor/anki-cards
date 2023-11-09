@@ -12,12 +12,18 @@ function revealClickable(clickable, ind){
 
 	clickable.style.display = "none";
 
-	if (document.getElementsByClassName("changeable")[ind].innerHTML.indexOf("___") != -1){
-		document.getElementsByClassName("changeable")[ind].innerHTML = document.getElementsByClassName("changeable")[ind].innerHTML.replace("___", tx)
+	changElem = document.getElementsByClassName("changeable")[ind]
+
+	if (changElem.innerHTML.indexOf("___") != -1){
+		changElem.innerHTML = changElem.innerHTML.replace("___", tx)
 
 	} else {
-		document.getElementsByClassName("changeable")[ind].innerHTML += tx;
+		changElem.innerHTML += tx;
 	}
+
+	setTimeout(function() {
+		changElem.style.opacity = "30%"
+	}, 1000)
 		
 	
 }
