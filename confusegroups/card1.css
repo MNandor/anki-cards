@@ -11,7 +11,7 @@
   text-align: left;;
 }
 
-img {
+img, .mobile img {
 	max-height: 2em;
 }
 
