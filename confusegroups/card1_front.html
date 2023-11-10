@@ -21,8 +21,10 @@ function revealClickable(clickable, ind){
 		changElem.innerHTML += tx;
 	}
 
+	changElem.classList.add("justGuessed");
 	setTimeout(function(elem) {
 		elem.style.opacity = "30%"
+		elem.classList.remove("justGuessed");
 	}, 1000, changElem)
 		
 	
