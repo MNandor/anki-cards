@@ -21,9 +21,9 @@ function revealClickable(clickable, ind){
 		changElem.innerHTML += tx;
 	}
 
-	setTimeout(function() {
-		changElem.style.opacity = "30%"
-	}, 1000)
+	setTimeout(function(elem) {
+		elem.style.opacity = "30%"
+	}, 1000, changElem)
 		
 	
 }
