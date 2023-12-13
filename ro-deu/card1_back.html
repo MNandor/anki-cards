@@ -32,14 +32,14 @@
 {{edit:Mnemonic}}
 
 <script>
-var wordFields = document.getElementsByClassName("word");
+wordFields = document.getElementsByClassName("word");
 
-for (var i=0; i<wordFields.length; i++){
+for (i=0; i<wordFields.length; i++){
 	var wordF = wordFields[i];
 	var wordT = wordF.innerHTML;
 
 
-	var keyword = "{{SP}}".toLowerCase()
+	keyword = "{{SP}}".toLowerCase()
 
 	if (keyword == "p" || keyword == "phrase")
 		wordF.classList.add('phrase');
