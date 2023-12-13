@@ -1,0 +1,95 @@
+{{#Swedish}}
+<div class="svgfriendly">
+{{#German}}
+
+<div class="cardinfo">Deutsch → Svenska</div>
+
+<span class="word canHaveContext">{{German}}</span>
+{{#Context_German}}
+<br>
+{{hint:Context_German}}
+{{/Context_German}}
+
+{{/German}}
+{{^German}}
+
+<div class="cardinfo">English → Svenska</div>
+
+<span class = "word canHaveContext">{{English}}</span>
+
+{{/German}}
+
+
+
+
+</div>
+
+
+<script>
+wordFields = document.getElementsByClassName("word");
+
+for (i=0; i<wordFields.length; i++){
+	var wordF = wordFields[i];
+	var wordT = wordF.innerHTML;
+
+
+	var keyword = "{{SP}}".toLowerCase()
+
+	if (keyword == "p" || keyword == "phrase")
+		wordF.classList.add('phrase');
+
+	else if (keyword == "v" || keyword == "verb")
+		wordF.classList.add('verb');
+
+	else if (keyword == "a" || keyword == "adj" || keyword == "adjective")
+		wordF.classList.add('adjective');
+
+	else if (keyword == "n" || keyword == "noun"){
+		if (RegExp("^ett .*").test(wordT))
+			wordF.classList.add('neuter');
+		else if (RegExp("^en .*").test(wordT))
+			wordF.classList.add('utrum');
+		else
+			// swedish has no feminine, so this indicates an error
+			wordF.classList.add('feminine');
+	}
+
+}
+
+</script> 
+
+<script>
+nom = '<img src="Mule_Nominative.svg" class="textSvg"/>'
+acc = '<img src="Mule_Accusative.svg" class="textSvg"/>'
+dat = '<img src="Mule_Dative.svg" class="textSvg"/>'
+gen = '<img src="Mule_Genitive.svg" class="textSvg"/>'
+voc = '<img src="Mule_Vocative.svg" class="textSvg"/>'
+tra = '<img src="Mule_Transitive.svg" class="textSvg"/>'
+itr = '<img src="Mule_Intransitive.svg" class="textSvg"/>'
+
+
+var w = document.getElementById("word");
+var wl = document.getElementsByClassName("svgfriendly");
+for (i in wl){
+	w = wl[i]
+	w.innerHTML = w.innerHTML.replaceAll("\\n", nom);
+	w.innerHTML = w.innerHTML.replaceAll("\\a", acc);
+	w.innerHTML = w.innerHTML.replaceAll("\\d", dat);
+	w.innerHTML = w.innerHTML.replaceAll("\\g", gen);
+	w.innerHTML = w.innerHTML.replaceAll("\\v", voc);
+	w.innerHTML = w.innerHTML.replaceAll("\\t", tra);
+	w.innerHTML = w.innerHTML.replaceAll("\\i", itr);
+}
+</script>
+
+<script>
+// makes text in parentheses smaller
+
+var spans = document.getElementsByClassName("canHaveContext");
+
+for (var i = 0; i < spans.length; i++) {
+    var span = spans[i];
+    span.innerHTML = span.innerHTML.replace(/\(([^)]+)\)/g, '<span class="hasContext">$&</span>');
+}
+</script>
+{{/Swedish}}
