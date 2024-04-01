@@ -2,7 +2,7 @@
 <div class="svgfriendly">
 {{#German}}
 
-<div class="cardinfo">Deutsch → Svenska</div>
+<div class="cardinfo">Deutsch → Svenska<br>{{hint:English}}</div>
 
 <span class="word canHaveContext">{{German}}</span>
 {{#Context_German}}
@@ -49,9 +49,16 @@ for (i=0; i<wordFields.length; i++){
 			wordF.classList.add('neuter');
 		else if (RegExp("^en .*").test(wordT))
 			wordF.classList.add('utrum');
-		else
-			// swedish has no feminine, so this indicates an error
+
+		else if (RegExp("^der .*die").test(wordT))
+			wordF.classList.add('masculine');
+		else if (RegExp("^die .*die").test(wordT))
 			wordF.classList.add('feminine');
+		else if (RegExp("^das .*die").test(wordT))
+			wordF.classList.add('neuter');
+
+		else
+			wordF.classList.add('error');
 	}
 
 }

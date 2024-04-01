@@ -2,7 +2,7 @@
 <div class="svgfriendly">
 {{#Romanian}}
 
-<div class="cardinfo">Română → Deutsch</div>
+<div class="cardinfo">Română → Deutsch<br>{{hint::English}}</div>
 
 <span class="word canHaveContext">{{Romanian}}</span>
 {{#Context_Romanian}}
@@ -52,7 +52,7 @@ for (var i=0; i<wordFields.length; i++){
 		else if (RegExp("^das .*die").test(wordT) || RegExp("^un .*două").test(wordT))
 			wordF.classList.add('neuter');
 		else
-			wordF.classList.add('utrum');
+			wordF.classList.add('error');
 	}
 
 }
