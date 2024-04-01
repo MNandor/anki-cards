@@ -14,58 +14,49 @@
 	color: #00FF00;
 }
 
-.mobile .phrase {
-	color: #FF00FF;
-}
-
 .verb {
 	color: #FF0000;
-}
-
-.mobile .verb {
-	color: #00FFFF;
 }
 
 .adjective {
 	color: #FFFF00;
 }
 
-.mobile .adjective {
-	color: #0000FF;
-}
-
 .masculine {
 	color: #0000FF;
-}
-
-.mobile .masculine {
-	color: #FFFF00;
 }
 
 .feminine {
 	color: #FF00FF;
 }
 
-.mobile .feminine {
-	color: #00FF00;
-}
-
 .neuter {
 	color: #00FFFF;
 }
 
-.mobile .neuter {
-	color: #FF0000;
+
+.utrum {
+	color: #80FF80;
 }
 
-svg{
-	height: 1em;
+.textSvg{
+	height: .8em;
 	padding: 0px;
 	margin-left: -8px;
-	margin-r
 }
 
 .hasContext {
 	font-size: .7em;
+	opacity: 70%;
+}
+
+.error {
+	color: #FF0000;
+	background-color: #00FFFF;
+}
+
+.small {
+	font-size: 0.5em;
+	color: white;
 	opacity: 70%;
 }
