@@ -41,25 +41,36 @@ for (i=0; i<wordFields.length; i++){
 
 	keyword = "{{SP}}".toLowerCase()
 
+	var cssClass = ""
+
 	if (keyword == "p" || keyword == "phrase")
-		wordF.classList.add('phrase');
+		cssClass = "phrase";
 
 	else if (keyword == "v" || keyword == "verb")
-		wordF.classList.add('verb');
+		cssClass = "verb";
 
 	else if (keyword == "a" || keyword == "adj" || keyword == "adjective")
-		wordF.classList.add('adjective');
+		cssClass = "adjective";
 
 	else if (keyword == "n" || keyword == "noun"){
+		// german and romanian
 		if (RegExp("^der .*die").test(wordT) || RegExp("^un .*doi").test(wordT))
-			wordF.classList.add('masculine');
+			cssClass = "masculine";
 		else if (RegExp("^die .*die").test(wordT) || RegExp("^o .*două").test(wordT))
-			wordF.classList.add('feminine');
+			cssClass = "feminine";
 		else if (RegExp("^das .*die").test(wordT) || RegExp("^un .*două").test(wordT))
+			cssClass = "neuter";
+		// swedish
+		else if (RegExp("^ett .*").test(wordT))
 			wordF.classList.add('neuter');
+		else if (RegExp("^en .*").test(wordT))
+			wordF.classList.add('utrum');
+		// uncountables, english
 		else
-			wordF.classList.add('error');
+			cssClass = "error";
 	}
+
+	wordF.classList.add(cssClass)
 
 }
 
