@@ -1,127 +1,134 @@
 <div class="svgfriendly">
-{{#Romanian}}
-
-<div class="cardinfo">Română → Deutsch<br>{{hint::English}}</div>
-
-<span class="word canHaveContext">{{Romanian}}</span>
-{{#Context_Romanian}}
-<br>
-{{Context_Romanian}}
-{{/Context_Romanian}}
-
-{{/Romanian}}
-{{^Romanian}}
-
-<div class="cardinfo">English → Deutsch</div>
-
-<span class = "word canHaveContext">{{English}}</span>
-
-{{/Romanian}}
-
-
-<hr>
-<span class="word canHaveContext">{{German}}</span>
-{{#Context_German}}
-<br>
-{{Context_German}}
-{{/Context_German}}
-
-
-</div>
-
-{{edit:Mnemonic}}
-
-<script>
-wordFields = document.getElementsByClassName("word");
-
-for (i=0; i<wordFields.length; i++){
-	var wordF = wordFields[i];
-	var wordT = wordF.innerHTML;
-
-
-	keyword = "{{SP}}".toLowerCase()
-
-	var cssClass = ""
-
-	if (keyword == "p" || keyword == "phrase")
-		cssClass = "phrase";
-
-	else if (keyword == "v" || keyword == "verb")
-		cssClass = "verb";
-
-	else if (keyword == "a" || keyword == "adj" || keyword == "adjective")
-		cssClass = "adjective";
-
-	else if (keyword == "n" || keyword == "noun"){
-		// german and romanian
-		if (RegExp("^der .*die").test(wordT) || RegExp("^un .*doi").test(wordT))
-			cssClass = "masculine";
-		else if (RegExp("^die .*die").test(wordT) || RegExp("^o .*două").test(wordT))
-			cssClass = "feminine";
-		else if (RegExp("^das .*die").test(wordT) || RegExp("^un .*două").test(wordT))
-			cssClass = "neuter";
-		// swedish
-		else if (RegExp("^ett .*").test(wordT))
-			wordF.classList.add('neuter');
-		else if (RegExp("^en .*").test(wordT))
-			wordF.classList.add('utrum');
-		// uncountables, english
-		else
-			cssClass = "error";
+	{{#Romanian}}
+	
+	<div class="cardinfo">Română → Deutsch<br>{{hint::English}}</div>
+	
+	<span class="word canHaveContext">{{Romanian}}</span>
+	{{#Context_Romanian}}
+	<br>
+	<span class="queContext">{{Context_Romanian}}</span>
+	{{/Context_Romanian}}
+	
+	{{/Romanian}}
+	{{^Romanian}}
+	
+	<div class="cardinfo">English → Deutsch</div>
+	
+	<span class = "word canHaveContext">{{English}}</span>
+	
+	{{/Romanian}}
+	
+	
+	<hr>
+	<span class="word canHaveContext">{{German}}</span>
+	{{#Context_German}}
+	<br>
+	<span class="ansContext">{{Context_German}}</span>
+	{{/Context_German}}
+	
+	
+	</div>
+	
+	{{edit:Mnemonic}}
+	
+	<script>
+	wordFields = document.getElementsByClassName("word");
+	
+	for (i=0; i<wordFields.length; i++){
+		var wordF = wordFields[i];
+		var wordT = wordF.innerHTML;
+	
+	
+		keyword = "{{SP}}".toLowerCase()
+	
+		var cssClass = ""
+	
+		if (keyword == "p" || keyword == "phrase")
+			cssClass = "phrase";
+	
+		else if (keyword == "v" || keyword == "verb")
+			cssClass = "verb";
+	
+		else if (keyword == "a" || keyword == "adj" || keyword == "adjective")
+			cssClass = "adjective";
+	
+		else if (keyword == "n" || keyword == "noun"){
+			// german and romanian
+			if (RegExp("^der .*die").test(wordT) || RegExp("^un .*doi").test(wordT))
+				cssClass = "masculine";
+			else if (RegExp("^die .*die").test(wordT) || RegExp("^o .*două").test(wordT))
+				cssClass = "feminine";
+			else if (RegExp("^das .*die").test(wordT) || RegExp("^un .*două").test(wordT))
+				cssClass = "neuter";
+			// swedish
+			else if (RegExp("^ett .*").test(wordT))
+				cssClass = "neuter"
+			else if (RegExp("^en .*").test(wordT))
+				cssClass = "utrum";
+			// uncountables, english
+			else
+				cssClass = "error";
+		}
+	
+		wordF.classList.add(cssClass)
+	
+		if (i == 1){
+			boldTags = document.querySelectorAll('.ansContext b');
+			boldTags.forEach(tag => {tag.classList.add(cssClass);});
+		}
+		if (i == 0){
+			boldTags = document.querySelectorAll('.queContext b');
+			boldTags.forEach(tag => {tag.classList.add(cssClass);});
+		}
+	
 	}
-
-	wordF.classList.add(cssClass)
-
-	const boldTags = document.querySelectorAll('b');
-	boldTags.forEach(tag => {tag.classList.add(cssClass);});
-
-}
-
-</script> 
-
-<script>
-nom = '<img src="Mule_Nominative.svg" class="textSvg"/>'
-acc = '<img src="Mule_Accusative.svg" class="textSvg"/>'
-dat = '<img src="Mule_Dative.svg" class="textSvg"/>'
-gen = '<img src="Mule_Genitive.svg" class="textSvg"/>'
-voc = '<img src="Mule_Vocative.svg" class="textSvg"/>'
-tra = '<img src="Mule_Transitive.svg" class="textSvg"/>'
-itr = '<img src="Mule_Intransitive.svg" class="textSvg"/>'
-unc = '<img src="Mule_Uncountable.svg" class="textSvg"/>'
-
-
-var w = document.getElementById("word");
-var wl = document.getElementsByClassName("svgfriendly");
-for (i in wl){
-	w = wl[i]
-	w.innerHTML = w.innerHTML.replaceAll("\\n", nom);
-	w.innerHTML = w.innerHTML.replaceAll("\\a", acc);
-	w.innerHTML = w.innerHTML.replaceAll("\\d", dat);
-	w.innerHTML = w.innerHTML.replaceAll("\\g", gen);
-	w.innerHTML = w.innerHTML.replaceAll("\\v", voc);
-	w.innerHTML = w.innerHTML.replaceAll("\\t", tra);
-	w.innerHTML = w.innerHTML.replaceAll("\\i", itr);
-	w.innerHTML = w.innerHTML.replaceAll("\\u", unc);
-}
-</script>
-
-<script>
-	var w = document.getElementsByClassName("word")[1];
-	var keyword = "{{SP}}".toLowerCase();
-
-	if (keyword == "v"){
-		w.innerHTML = w.innerHTML.replace(/^(ab|an|auf|aus|bei|ein|los|mit|nach|her|hin|vor|weg|zu|zurück)/, "$&-")
+	
+	</script> 
+	
+	<script>
+	nom = '<img src="Mule_Nominative.svg" class="textSvg"/>'
+	acc = '<img src="Mule_Accusative.svg" class="textSvg"/>'
+	dat = '<img src="Mule_Dative.svg" class="textSvg"/>'
+	gen = '<img src="Mule_Genitive.svg" class="textSvg"/>'
+	voc = '<img src="Mule_Vocative.svg" class="textSvg"/>'
+	tra = '<img src="Mule_Transitive.svg" class="textSvg"/>'
+	itr = '<img src="Mule_Intransitive.svg" class="textSvg"/>'
+	unc = '<img src="Mule_Uncountable.svg" class="textSvg"/>'
+	
+	
+	var w = document.getElementById("word");
+	var wl = document.getElementsByClassName("svgfriendly");
+	for (i in wl){
+		w = wl[i]
+		w.innerHTML = w.innerHTML.replaceAll("\\n", nom);
+		w.innerHTML = w.innerHTML.replaceAll("\\a", acc);
+		w.innerHTML = w.innerHTML.replaceAll("\\d", dat);
+		w.innerHTML = w.innerHTML.replaceAll("\\g", gen);
+		w.innerHTML = w.innerHTML.replaceAll("\\v", voc);
+		w.innerHTML = w.innerHTML.replaceAll("\\t", tra);
+		w.innerHTML = w.innerHTML.replaceAll("\\i", itr);
+		w.innerHTML = w.innerHTML.replaceAll("\\u", unc);
 	}
-
-</script>
-
-<script>
-// makes text in parentheses smaller
-
-var spans = document.getElementsByClassName("canHaveContext");
-
-for (var i = 0; i < spans.length; i++) {
-    var span = spans[i];
-    span.innerHTML = span.innerHTML.replace(/\(([^)]+)\)/g, '<span class="hasContext">$&</span>');
-}
-</script>
+	</script>
+	
+	<script>
+		var w = document.getElementsByClassName("word")[1];
+		var keyword = "{{SP}}".toLowerCase();
+	
+		if (keyword == "v"){
+			w.innerHTML = w.innerHTML.replace(/^(ab|an|auf|aus|bei|ein|los|mit|nach|her|hin|vor|weg|zu|zurück)/, "$&-")
+		}
+	
+	</script>
+	
+	<script>
+	// makes text in parentheses smaller
+	
+	var spans = document.getElementsByClassName("canHaveContext");
+	
+	for (var i = 0; i < spans.length; i++) {
+		var span = spans[i];
+		span.innerHTML = span.innerHTML.replace(/\(([^)]+)\)/g, '<span class="hasContext">$&</span>');
+	}
+	</script>
+	
