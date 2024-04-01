@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="10mm"
+   height="10mm"
+   viewBox="0 0 10 10"
+   version="1.1"
+   id="svg5"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2" />
+  <g
+     id="layer1">
+    <path
+       style="color:#000000;font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.460801;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000;stop-opacity:1"
+       d="M 5,0.66210937 C 2.6098152,0.66210937 0.66210938,2.6098152 0.66210937,5 0.66210938,7.3901848 2.6098152,9.3378906 5,9.3378906 7.3901848,9.3378906 9.3378906,7.3901848 9.3378906,5 9.3378906,2.6098152 7.3901848,0.66210938 5,0.66210937 Z M 5,1.6621094 C 6.8497452,1.6621094 8.3378906,3.1502548 8.3378906,5 8.3378906,6.8497452 6.8497452,8.3378906 5,8.3378906 3.1502548,8.3378906 1.6621094,6.8497452 1.6621094,5 1.6621094,3.1502548 3.1502548,1.6621094 5,1.6621094 Z"
+       id="path846" />
+    <path
+       id="path846-3"
+       style="color:#000000;font-variation-settings:normal;vector-effect:none;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.460801;stroke-opacity:1;-inkscape-stroke:none;paint-order:normal;stop-color:#000000"
+       d="m 2.7752617,4.2837034 c -0.3766361,0 -0.689167,0.3252121 -0.689167,0.7166445 0,0.3914326 0.3125309,0.7159483 0.689167,0.7159483 0.3119019,0 0.5801385,-0.2227205 0.6630724,-0.5216393 h 0.8992625 c 0.082934,0.2989188 0.3505015,0.5216393 0.6624033,0.5216393 0.3119019,0 0.5794694,-0.2227205 0.6624033,-0.5216393 h 0.8992626 c 0.082934,0.2989188 0.3511706,0.5216393 0.6630723,0.5216393 0.3766362,0 0.689167,-0.3245157 0.689167,-0.7159483 0,-0.3914324 -0.3125308,-0.7166445 -0.689167,-0.7166445 -0.3117906,0 -0.5800362,0.222881 -0.6630723,0.5216392 H 5.6624032 C 5.579367,4.5065844 5.3117907,4.2837034 4.9999999,4.2837034 c -0.3117907,0 -0.5793671,0.222881 -0.6624033,0.5216392 H 3.4383341 C 3.3552979,4.5065844 3.0870526,4.2837034 2.7752617,4.2837034 Z" />
+  </g>
+</svg>
