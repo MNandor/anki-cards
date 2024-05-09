@@ -7,7 +7,7 @@
 <span class="word canHaveContext">{{German}}</span>
 {{#Context_German}}
 <br>
-{{hint:Context_German}}
+<span class="queContext">{{hint:Context_German}}</span>
 {{/Context_German}}
 
 {{/German}}
@@ -56,9 +56,9 @@ for (i=0; i<wordFields.length; i++){
 			cssClass = "neuter";
 		// swedish
 		else if (RegExp("^ett .*").test(wordT))
-			wordF.classList.add('neuter');
+			cssClass = "neuter";
 		else if (RegExp("^en .*").test(wordT))
-			wordF.classList.add('utrum');
+			cssClass = "utrum";
 		// uncountables, english
 		else
 			cssClass = "error";
@@ -81,6 +81,7 @@ gen = '<img src="Mule_Genitive.svg" class="textSvg"/>'
 voc = '<img src="Mule_Vocative.svg" class="textSvg"/>'
 tra = '<img src="Mule_Transitive.svg" class="textSvg"/>'
 itr = '<img src="Mule_Intransitive.svg" class="textSvg"/>'
+ref = '<img src="Mule_Reflexive.svg" class="textSvg"/>'
 
 
 var w = document.getElementById("word");
@@ -95,6 +96,7 @@ for (i in wl){
 	w.innerHTML = w.innerHTML.replaceAll("\\t", tra);
 	w.innerHTML = w.innerHTML.replaceAll("\\i", itr);
 	w.innerHTML = w.innerHTML.replaceAll("\\u", unc);
+	w.innerHTML = w.innerHTML.replaceAll("\\r", ref);
 }
 </script>
 

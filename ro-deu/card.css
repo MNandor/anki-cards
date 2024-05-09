@@ -1,9 +1,9 @@
 .card {
-  font-family: arial;
-  font-size: 36px;
-  text-align: center;
-  color: black;
-  background-color: white;
+font-family: arial;
+font-size: 36px;
+text-align: center;
+color: black;
+background-color: white;
 }
 
 .cardinfo {
@@ -59,4 +59,12 @@
 	font-size: 0.5em;
 	color: white;
 	opacity: 70%;
+}
+
+.contSent {
+	font-size: 0.7em;
+}
+
+.queContext, .ansContext{
+	font-size: 0.7em;
 }
