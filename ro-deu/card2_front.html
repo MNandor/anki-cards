@@ -82,6 +82,7 @@ voc = '<img src="Mule_Vocative.svg" class="textSvg"/>'
 tra = '<img src="Mule_Transitive.svg" class="textSvg"/>'
 itr = '<img src="Mule_Intransitive.svg" class="textSvg"/>'
 ref = '<img src="Mule_Reflexive.svg" class="textSvg"/>'
+mal = '<img src="Mule_Formal.svg" class="textSvg"/>'
 
 
 var w = document.getElementById("word");
@@ -97,6 +98,7 @@ for (i in wl){
 	w.innerHTML = w.innerHTML.replaceAll("\\i", itr);
 	w.innerHTML = w.innerHTML.replaceAll("\\u", unc);
 	w.innerHTML = w.innerHTML.replaceAll("\\r", ref);
+	w.innerHTML = w.innerHTML.replaceAll("\\f", mal);
 }
 </script>
 
