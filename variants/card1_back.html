@@ -1,0 +1,39 @@
+{{FrontSide}}
+
+<hr id=answer>
+
+{{#Explanation}}
+{{Explanation}}
+<hr>
+{{/Explanation}}
+
+<div id="answers">{{Answers}}</div>
+
+
+{{#Mnemonic}}
+<hr>
+{{edit::Mnemonic}}
+{{/Mnemonic}}
+
+
+<script>
+
+// literally the same code as front side
+// except we act on the Answers field
+
+today = new Date();
+dayNumber = Math.floor(today.getTime() / 1000 / 86400);
+
+varsV = document.getElementById("answers");
+
+vars = varsV.innerHTML.split("<br>");
+
+chosen = vars[ dayNumber % vars.length ];
+
+// germany only - color articles
+ch = chosen.replace(/^der\s+/g, "<span class='masc'>$&</span>").replace(/^die\s+/g, "<span class='fem'>$&</span>").replace(/^das\s+/g, "<span class='neut'>$&</span>")
+
+
+varsV.innerHTML = ch;
+
+</script>

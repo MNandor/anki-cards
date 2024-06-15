@@ -1,0 +1,22 @@
+{{Instruction}}
+
+
+<div id="variants">{{Variants}}</div>
+
+<script>
+
+// we use the days since Unix time start as our "random" number
+// this is because actual random numbers can't be passed to the back side
+// (and if you managed to do it on one platform, it will break on another)
+// the day is consistent though
+
+today = new Date();
+dayNumber = Math.floor(today.getTime() / 1000 / 86400);
+
+varsV = document.getElementById("variants");
+
+vars = varsV.innerHTML.split("<br>");
+
+varsV.innerHTML = vars[ dayNumber % vars.length ]
+
+</script>

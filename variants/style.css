@@ -1,0 +1,33 @@
+.card {
+    font-family: arial;
+    font-size: 20px;
+    text-align: center;
+    color: black;
+    background-color: white;
+}
+
+#variants{
+	border: 1px dashed gray;
+	margin: 8px;
+}
+
+#answers{
+	border: 1px dashed white;
+	margin: 8px;
+}
+
+hr{
+	opacity: 0.5;
+}
+
+.masc{
+	color: #0000FF;
+}
+
+.fem{
+	color: #FF00FF;
+}
+
+.neut{
+	color: #00FFFF;
+}
