@@ -72,3 +72,7 @@ background-color: white;
 .queContext, .ansContext{
 	font-size: 0.7em;
 }
+  
+  .mobile #imgcont img {
+	  opacity: 0.75;
+  }
