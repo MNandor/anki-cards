@@ -115,4 +115,17 @@ for (var i = 0; i < spans.length; i++) {
     span.innerHTML = span.innerHTML.replace(/\(([^)]+)\)/g, '<span class="hasContext">$&</span>');
 }
 </script>
+
+<script>
+tags = "{{Tags}}"
+
+inf = document.getElementsByClassName("cardinfo")
+
+if (tags.includes("fin::deu"))
+	inf[0].innerText = inf[0].innerText.replace("Deutsch", "Deutsch ✓")
+if (tags.includes("fin::ron"))
+	inf[0].innerText = inf[0].innerText.replace("Română", "Română ✓")
+if (tags.includes("fin::swe"))
+	inf[0].innerText = inf[0].innerText.replace("Svenska", "Svenska ✓")
+</script>
 {{/Romanian}}
