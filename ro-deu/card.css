@@ -13,6 +13,10 @@ background-color: white;
 .phrase {
 	color: #00FF00;
 }
+  
+  .sentence {
+	  color: #BBFFBB;
+  }
 
 .verb {
 	color: #FF0000;
