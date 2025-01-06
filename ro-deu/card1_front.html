@@ -129,4 +129,17 @@ if (tags.includes("fin::ron"))
 if (tags.includes("fin::swe"))
 	inf[0].innerText = inf[0].innerText.replace("Svenska", "Svenska ✓")
 </script>
+
+<script>
+
+// in case of sentences, have the same-language context show
+
+if ("{{SP}}".toLowerCase() == "s"){
+	contField = document.getElementsByClassName("queContext")[0];
+	if (contField != null){
+		contField.innerHTML += "<hr><div>{{Context_German}}</div><br>"
+	}
+}
+
+</script>
 {{/German}}
