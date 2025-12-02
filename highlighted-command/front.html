@@ -2,35 +2,99 @@
 
 <input type="text" class="typing-field" id="typing-input" placeholder="Type command..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
 
-<div class="typing-feedback" id="typing-feedback"></div>
+<div class="bash-code" id="typing-feedback"></div>
 
-<div id="correct-command" style="display: none;">{{Command}}</div>
+<div id="correct-commands" style="display: none;">{{Command}}</div>
 
 <script>
 (function() {
     var typingField = document.getElementById('typing-input');
     var feedbackDiv = document.getElementById('typing-feedback');
-    var correctCommandDiv = document.getElementById('correct-command');
+    var correctCommandsDiv = document.getElementById('correct-commands');
     
-    if (!typingField || !feedbackDiv || !correctCommandDiv) return;
+    if (!typingField || !feedbackDiv || !correctCommandsDiv) return;
     
-    var correctCommand = correctCommandDiv.textContent;
+    var correctCommands = correctCommandsDiv.innerHTML.split('<br>').filter(function(cmd) {
+        return cmd.trim().length > 0;
+    });
+    
+    function highlightBashToken(token, isFirstWord) {
+        var type = 'text';
+        
+        if (token.match(/^#/)) type = 'comment';
+        else if (token.match(/^["']/)) type = 'string';
+        else if (token.match(/^\$\w/)) type = 'variable';
+        else if (token.match(/^\$[@0#?!]/)) type = 'variable';
+        else if (token.match(/^--/)) type = 'flag-long';
+        else if (token.match(/^-\w/)) type = 'flag';
+        else if (token.match(/^(&&|\|\||>>|>|<|&|\||;)/)) type = 'symbol';
+        else if (isFirstWord && token.match(/^\w/)) type = 'cmd';
+        
+        return '<span class="' + type + '">' + token + '</span>';
+    }
+    
+    function highlightBashText(text) {
+        var tokens = text.match(/(#.*|["'][^"']*["']|--?\w+|\$[@0#?!]|\$\w+|[|&;><]|\|\||&&|>>|[^ \t\n\r"'$&|;()<>`]+|[ \t\n\r]+)/g) || [];
+        var isFirstWord = true;
+        var result = '';
+        
+        tokens.forEach(function(token) {
+            if (token.match(/^[ \t\n\r]+/)) {
+                result += token;
+            } else {
+                result += highlightBashToken(token, isFirstWord);
+                if (isFirstWord && token.match(/^\w/)) isFirstWord = false;
+            }
+        });
+        
+        return result;
+    }
+    
+    function getBestMatch(userInput) {
+        var bestMatch = '';
+        var bestMatchLength = 0;
+        
+        for (var i = 0; i < correctCommands.length; i++) {
+            var cmd = correctCommands[i];
+            var matchLength = 0;
+            
+            while (matchLength < userInput.length && matchLength < cmd.length && 
+                   userInput[matchLength] === cmd[matchLength]) {
+                matchLength++;
+            }
+            
+            if (matchLength > bestMatchLength) {
+                bestMatchLength = matchLength;
+                bestMatch = cmd;
+            }
+        }
+        
+        return {
+            command: bestMatch,
+            matchLength: bestMatchLength
+        };
+    }
     
     function updateFeedback() {
         var userInput = typingField.value;
+        var bestMatch = getBestMatch(userInput);
         var feedbackHTML = '';
         
-        for (var i = 0; i < userInput.length; i++) {
-            if (i < correctCommand.length && userInput[i] === correctCommand[i]) {
-                feedbackHTML += '<span class="correct-char">' + userInput[i] + '</span>';
-            } else {
-                feedbackHTML += '<span class="incorrect-char">' + userInput[i] + '</span>';
+        if (bestMatch.matchLength > 0) {
+            feedbackHTML = highlightBashText(userInput.substring(0, bestMatch.matchLength));
+        }
+        
+        if (bestMatch.matchLength < userInput.length) {
+            var incorrectPart = userInput.substring(bestMatch.matchLength);
+            for (var i = 0; i < incorrectPart.length; i++) {
+                feedbackHTML += '<span class="incorrect-char">' + incorrectPart[i] + '</span>';
             }
         }
         
         feedbackDiv.innerHTML = feedbackHTML;
         
-        if (userInput === correctCommand) {
+        var isCorrect = correctCommands.indexOf(userInput) !== -1;
+        if (isCorrect) {
             typingField.classList.add('correct');
         } else {
             typingField.classList.remove('correct');
@@ -42,11 +106,15 @@
     typingField.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') {
             e.preventDefault();
-            typingField.value = correctCommand;
-            updateFeedback();
+            var bestMatch = getBestMatch(typingField.value);
+            if (bestMatch.command) {
+                typingField.value = bestMatch.command;
+                updateFeedback();
+            }
         }
     });
     
     typingField.focus();
+    updateFeedback();
 })();
 </script>

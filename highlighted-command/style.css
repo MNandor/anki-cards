@@ -6,7 +6,6 @@
     background-color: white;
 }
 
-
 /* Base styling for the command container */
 .bash-code {
     font-family: 'Monaco', 'Menlo', 'Consolas', 'Courier New', monospace;
@@ -21,6 +20,7 @@
     border-left: 4px solid #2c3e50;
     color: white;
     text-align: left;
+    margin: 10px 0;
 }
 
 /* Highlight colors for different elements */
@@ -63,21 +63,47 @@
     color: #f39c12;
 }
 
-/* Optional: Add subtle background to highlighted elements */
-.bash-code .cmd,
-.bash-code .string,
-.bash-code .flag,
-.bash-code .flag-long,
-.bash-code .symbol,
-.bash-code .variable {
-    padding: 0 2px;
-    border-radius: 2px;
+/* Typing feedback styling */
+.typing-feedback .cmd {
+    color: #2980b9;
+    font-weight: bold;
 }
 
+.typing-feedback .string {
+    color: #e74c3c;
+}
 
+.typing-feedback .flag {
+    color: #16a085;
+}
 
-/* start of typing stuff */
+.typing-feedback .flag-long {
+    color: #27ae60;
+}
 
+.typing-feedback .symbol {
+    color: #8e44ad;
+    font-weight: bold;
+}
+
+.typing-feedback .variable {
+    color: #d35400;
+}
+
+.typing-feedback .comment {
+    color: #95a5a6;
+    font-style: italic;
+}
+
+.typing-feedback .path {
+    color: #34495e;
+}
+
+.typing-feedback .number {
+    color: #f39c12;
+}
+
+/* Typing input field */
 .typing-field {
     font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
     font-size: 16px;
@@ -91,6 +117,7 @@
 
 .typing-field.correct {
     border-color: #27ae60;
+    color: #27ae60;
 }
 
 .typing-feedback {
@@ -101,17 +128,11 @@
     min-height: 24px;
     padding: 5px;
     border-radius: 3px;
-}
-
-.correct-char {
-    color: #27ae60;
+    text-align: left;
+    border: 1px solid #e9ecef;
 }
 
 .incorrect-char {
     color: #e74c3c;
     text-decoration: underline;
-}
-
-.hidden {
-    color: red;
 }
