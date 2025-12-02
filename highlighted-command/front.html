@@ -1,0 +1,52 @@
+<div>{{Prompt}}</div>
+
+<input type="text" class="typing-field" id="typing-input" placeholder="Type command..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+
+<div class="typing-feedback" id="typing-feedback"></div>
+
+<div id="correct-command" style="display: none;">{{Command}}</div>
+
+<script>
+(function() {
+    var typingField = document.getElementById('typing-input');
+    var feedbackDiv = document.getElementById('typing-feedback');
+    var correctCommandDiv = document.getElementById('correct-command');
+    
+    if (!typingField || !feedbackDiv || !correctCommandDiv) return;
+    
+    var correctCommand = correctCommandDiv.textContent;
+    
+    function updateFeedback() {
+        var userInput = typingField.value;
+        var feedbackHTML = '';
+        
+        for (var i = 0; i < userInput.length; i++) {
+            if (i < correctCommand.length && userInput[i] === correctCommand[i]) {
+                feedbackHTML += '<span class="correct-char">' + userInput[i] + '</span>';
+            } else {
+                feedbackHTML += '<span class="incorrect-char">' + userInput[i] + '</span>';
+            }
+        }
+        
+        feedbackDiv.innerHTML = feedbackHTML;
+        
+        if (userInput === correctCommand) {
+            typingField.classList.add('correct');
+        } else {
+            typingField.classList.remove('correct');
+        }
+    }
+    
+    typingField.addEventListener('input', updateFeedback);
+    
+    typingField.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            typingField.value = correctCommand;
+            updateFeedback();
+        }
+    });
+    
+    typingField.focus();
+})();
+</script>

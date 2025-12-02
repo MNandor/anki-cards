@@ -1,0 +1,117 @@
+.card {
+    font-family: arial;
+    font-size: 20px;
+    text-align: center;
+    color: black;
+    background-color: white;
+}
+
+
+/* Base styling for the command container */
+.bash-code {
+    font-family: 'Monaco', 'Menlo', 'Consolas', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.4;
+    tab-size: 4;
+    white-space: pre;
+    overflow-x: auto;
+    background-color: #1b1e1f;
+    padding: 0.5em;
+    border-radius: 4px;
+    border-left: 4px solid #2c3e50;
+    color: white;
+    text-align: left;
+}
+
+/* Highlight colors for different elements */
+.bash-code .cmd {
+    color: #2980b9;
+    font-weight: bold;
+}
+
+.bash-code .string {
+    color: #e74c3c;
+}
+
+.bash-code .flag {
+    color: #16a085;
+}
+
+.bash-code .flag-long {
+    color: #27ae60;
+}
+
+.bash-code .symbol {
+    color: #8e44ad;
+    font-weight: bold;
+}
+
+.bash-code .variable {
+    color: #d35400;
+}
+
+.bash-code .comment {
+    color: #95a5a6;
+    font-style: italic;
+}
+
+.bash-code .path {
+    color: #34495e;
+}
+
+.bash-code .number {
+    color: #f39c12;
+}
+
+/* Optional: Add subtle background to highlighted elements */
+.bash-code .cmd,
+.bash-code .string,
+.bash-code .flag,
+.bash-code .flag-long,
+.bash-code .symbol,
+.bash-code .variable {
+    padding: 0 2px;
+    border-radius: 2px;
+}
+
+
+
+/* start of typing stuff */
+
+.typing-field {
+    font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-size: 16px;
+    width: 100%;
+    padding: 10px;
+    margin: 20px 0;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.typing-field.correct {
+    border-color: #27ae60;
+}
+
+.typing-feedback {
+    font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-size: 16px;
+    white-space: pre;
+    margin: 10px 0;
+    min-height: 24px;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.correct-char {
+    color: #27ae60;
+}
+
+.incorrect-char {
+    color: #e74c3c;
+    text-decoration: underline;
+}
+
+.hidden {
+    color: red;
+}

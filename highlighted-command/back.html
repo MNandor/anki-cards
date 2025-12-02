@@ -1,0 +1,49 @@
+<div>{{Prompt}}</div>
+
+<hr id=answer>
+
+<div class="bash-code">
+{{Command}}
+</div>
+
+<script>
+// Anki-friendly version - put this in your card template
+function highlightBashAnki(element) {
+    const text = element.textContent.trim();
+    element.innerHTML = '';
+    
+    // Simple tokenization for Anki
+    const tokens = text.match(/(#.*|["'][^"']*["']|--?\w+|\$[@0#?!]|\$\w+|[|&;><]|\|\||&&|>>|[^ \t\n\r"'$&|;()<>`]+|[ \t\n\r]+)/g) || [];
+    
+    let isFirstWord = true;
+    
+    tokens.forEach(token => {
+        let type = 'text';
+        
+        if (token.match(/^#/)) type = 'comment';
+        else if (token.match(/^["']/)) type = 'string';
+        else if (token.match(/^\$\w/)) type = 'variable';
+        else if (token.match(/^\$[@0#?!]/)) type = 'variable';
+        else if (token.match(/^--/)) type = 'flag-long';
+        else if (token.match(/^-\w/)) type = 'flag';
+        else if (token.match(/^(&&|\|\||>>|>|<|&|\||;)/)) type = 'symbol';
+        else if (isFirstWord && token.match(/^\w/)) {
+            type = 'cmd';
+            isFirstWord = false;
+        }
+        else if (token.match(/^[ \t\n\r]+/)) {
+            // Keep whitespace as text
+            element.appendChild(document.createTextNode(token));
+            return;
+        }
+        
+        const span = document.createElement('span');
+        span.className = type;
+        span.textContent = token;
+        element.appendChild(span);
+    });
+}
+
+// Call this on your bash elements
+document.querySelectorAll('.bash-code').forEach(el => highlightBashAnki(el));
+</script>
