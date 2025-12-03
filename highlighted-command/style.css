@@ -136,3 +136,17 @@
     color: #e74c3c;
     text-decoration: underline;
 }
+
+/* reused to signify placeholder because Anki has an easy shortcut */
+i, em {
+    font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+		opacity: 75%;
+  font-style: normal;
+}
+
+/* reused to signify code */
+strong, b {
+    font-weight: normal;
+  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+    color: #2980b9;
+}
