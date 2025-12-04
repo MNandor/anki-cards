@@ -18,7 +18,21 @@
         return cmd.trim().length > 0;
     });
     
-    function highlightBashToken(token, isFirstWord) {
+    // Function to check if a command is an alias and get the display version
+    function getDisplayCommand(cmd) {
+        var isAlias = cmd.startsWith('&gt;');
+        var displayCmd = isAlias ? cmd.substring(4).trim() : cmd;
+        return {
+            original: cmd,
+            display: displayCmd,
+            isAlias: isAlias
+        };
+    }
+    
+    // Get display versions of all commands for matching
+    var displayCommands = correctCommands.map(getDisplayCommand);
+    
+    function highlightBashToken(token, isFirstWord, isAlias) {
         var type = 'text';
         
         if (token.match(/^#/)) type = 'comment';
@@ -28,12 +42,12 @@
         else if (token.match(/^--/)) type = 'flag-long';
         else if (token.match(/^-\w/)) type = 'flag';
         else if (token.match(/^(&&|\|\||>>|>|<|&|\||;)/)) type = 'symbol';
-        else if (isFirstWord && token.match(/^\w/)) type = 'cmd';
+        else if (isFirstWord && token.match(/^\w/)) type = isAlias ? 'alias' : 'cmd';
         
         return '<span class="' + type + '">' + token + '</span>';
     }
     
-    function highlightBashText(text) {
+    function highlightBashText(text, isAlias) {
         var tokens = text.match(/(#.*|["'][^"']*["']|--?\w+|\$[@0#?!]|\$\w+|[|&;><]|\|\||&&|>>|[^ \t\n\r"'$&|;()<>`]+|[ \t\n\r]+)/g) || [];
         var isFirstWord = true;
         var result = '';
@@ -42,7 +56,7 @@
             if (token.match(/^[ \t\n\r]+/)) {
                 result += token;
             } else {
-                result += highlightBashToken(token, isFirstWord);
+                result += highlightBashToken(token, isFirstWord, isAlias);
                 if (isFirstWord && token.match(/^\w/)) isFirstWord = false;
             }
         });
@@ -51,11 +65,12 @@
     }
     
     function getBestMatch(userInput) {
-        var bestMatch = '';
+        var bestMatch = null;
         var bestMatchLength = 0;
         
-        for (var i = 0; i < correctCommands.length; i++) {
-            var cmd = correctCommands[i];
+        for (var i = 0; i < displayCommands.length; i++) {
+            var cmdInfo = displayCommands[i];
+            var cmd = cmdInfo.display;
             var matchLength = 0;
             
             while (matchLength < userInput.length && matchLength < cmd.length && 
@@ -65,12 +80,12 @@
             
             if (matchLength > bestMatchLength) {
                 bestMatchLength = matchLength;
-                bestMatch = cmd;
+                bestMatch = cmdInfo;
             }
         }
         
         return {
-            command: bestMatch,
+            commandInfo: bestMatch,
             matchLength: bestMatchLength
         };
     }
@@ -80,8 +95,8 @@
         var bestMatch = getBestMatch(userInput);
         var feedbackHTML = '';
         
-        if (bestMatch.matchLength > 0) {
-            feedbackHTML = highlightBashText(userInput.substring(0, bestMatch.matchLength));
+        if (bestMatch.matchLength > 0 && bestMatch.commandInfo) {
+            feedbackHTML = highlightBashText(userInput.substring(0, bestMatch.matchLength), bestMatch.commandInfo.isAlias);
         }
         
         if (bestMatch.matchLength < userInput.length) {
@@ -93,7 +108,15 @@
         
         feedbackDiv.innerHTML = feedbackHTML;
         
-        var isCorrect = correctCommands.indexOf(userInput) !== -1;
+        // Check if user input matches any display command exactly
+        var isCorrect = false;
+        for (var i = 0; i < displayCommands.length; i++) {
+            if (userInput === displayCommands[i].display) {
+                isCorrect = true;
+                break;
+            }
+        }
+        
         if (isCorrect) {
             typingField.classList.add('correct');
         } else {
@@ -107,8 +130,9 @@
         if (e.key === 'Enter') {
             e.preventDefault();
             var bestMatch = getBestMatch(typingField.value);
-            if (bestMatch.command) {
-                typingField.value = bestMatch.command;
+            if (bestMatch.commandInfo) {
+                // Only autocomplete with the display version (without >)
+                typingField.value = bestMatch.commandInfo.display;
                 updateFeedback();
             }
         }

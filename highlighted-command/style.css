@@ -29,6 +29,10 @@
     font-weight: bold;
 }
 
+.bash-code .alias{
+	color: #28bab7;
+}
+
 .bash-code .string {
     color: #e74c3c;
 }
@@ -133,8 +137,9 @@
 }
 
 .incorrect-char {
-    color: #e74c3c;
+    color: red;#e74c3c;
     text-decoration: underline;
+		background-color: yellow;
 }
 
 /* reused to signify placeholder because Anki has an easy shortcut */

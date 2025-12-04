@@ -6,47 +6,57 @@
 
 <div id="correct-commands-back" style="display: none;">{{Command}}</div>
 
+<br>
+{{edit::Mnemonic}}
+
 <script>
 var commandDisplay = document.getElementById('command-display');
 var correctCommandsDiv = document.getElementById('correct-commands-back');
 
 if (commandDisplay && correctCommandsDiv) {
-    var commandLines = correctCommandsDiv.innerHTML.split('<br>').filter(function(line) {
-        return line.trim().length > 0;
-    });
+ var commandLines = correctCommandsDiv.innerHTML.split('<br>').filter(function(line) {
+    return line.trim().length > 0;
+});
+
+function highlightBashAnki(element, text) {
+    element.innerHTML = '';
     
-    function highlightBashAnki(element, text) {
-        element.innerHTML = '';
-        
-        var tokens = text.match(/(#.*|["'][^"']*["']|--?\w+|\$[@0#?!]|\$\w+|[|&;><]|\|\||&&|>>|[^ \t\n\r"'$&|;()<>`]+|[ \t\n\r]+)/g) || [];
-        
-        var isFirstWord = true;
-        
-        tokens.forEach(function(token) {
-            var type = 'text';
-            
-            if (token.match(/^#/)) type = 'comment';
-            else if (token.match(/^["']/)) type = 'string';
-            else if (token.match(/^\$\w/)) type = 'variable';
-            else if (token.match(/^\$[@0#?!]/)) type = 'variable';
-            else if (token.match(/^--/)) type = 'flag-long';
-            else if (token.match(/^-\w/)) type = 'flag';
-            else if (token.match(/^(&&|\|\||>>|>|<|&|\||;)/)) type = 'symbol';
-            else if (isFirstWord && token.match(/^\w/)) {
-                type = 'cmd';
-                isFirstWord = false;
-            }
-            
-            if (token.match(/^[ \t\n\r]+/)) {
-                element.appendChild(document.createTextNode(token));
-            } else {
-                var span = document.createElement('span');
-                span.className = type;
-                span.textContent = token;
-                element.appendChild(span);
-            }
-        });
+    // Check if this is an alias line (starts with >)
+    var isAlias = text.startsWith('&gt;');
+    if (isAlias) {
+        // Remove the > prefix for display
+        text = text.substring(4).trim();
     }
+    
+    var tokens = text.match(/(#.*|["'][^"']*["']|--?\w+|\$[@0#?!]|\$\w+|[|&;><]|\|\||&&|>>|[^ \t\n\r"'$&|;()<>`]+|[ \t\n\r]+)/g) || [];
+    
+    var isFirstWord = true;
+    
+    tokens.forEach(function(token) {
+        var type = 'text';
+        
+        if (token.match(/^#/)) type = 'comment';
+        else if (token.match(/^["']/)) type = 'string';
+        else if (token.match(/^\$\w/)) type = 'variable';
+        else if (token.match(/^\$[@0#?!]/)) type = 'variable';
+        else if (token.match(/^--/)) type = 'flag-long';
+        else if (token.match(/^-\w/)) type = 'flag';
+        else if (token.match(/^(&&|\|\||>>|>|<|&|\||;)/)) type = 'symbol';
+        else if (isFirstWord && token.match(/^\w/)) {
+            type = isAlias ? 'alias' : 'cmd';
+            isFirstWord = false;
+        }
+        
+        if (token.match(/^[ \t\n\r]+/)) {
+            element.appendChild(document.createTextNode(token));
+        } else {
+            var span = document.createElement('span');
+            span.className = type;
+            span.textContent = token;
+            element.appendChild(span);
+        }
+    });
+}
     
     commandLines.forEach(function(line, index) {
         var lineContainer = document.createElement('div');
