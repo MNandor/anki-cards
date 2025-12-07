@@ -14,8 +14,19 @@
     
     if (!typingField || !feedbackDiv || !correctCommandsDiv) return;
     
-    var correctCommands = correctCommandsDiv.innerHTML.split('<br>').filter(function(cmd) {
+    // Function to remove #hide from a command
+    function removeHideComment(cmd) {
+        // Remove #hide and any trailing whitespace
+        return cmd.replace(/\s*#hide\s*$/, '');
+    }
+    
+    // Process commands to remove #hide from the end
+    var rawCommands = correctCommandsDiv.innerHTML.split('<br>').filter(function(cmd) {
         return cmd.trim().length > 0;
+    });
+    
+    var correctCommands = rawCommands.map(function(cmd) {
+        return removeHideComment(cmd);
     });
     
     // Function to check if a command is an alias and get the display version
@@ -29,7 +40,7 @@
         };
     }
     
-    // Get display versions of all commands for matching
+    // Get display versions of all commands for matching (without #hide)
     var displayCommands = correctCommands.map(getDisplayCommand);
     
     function highlightBashToken(token, isFirstWord, isAlias) {
@@ -107,7 +118,8 @@
         }
         
         feedbackDiv.innerHTML = feedbackHTML;
-             // Check if user input matches any display command (ignoring comments)
+        
+        // Check if user input matches any display command (ignoring comments)
         var isCorrect = false;
         for (var i = 0; i < displayCommands.length; i++) {
             var cmdDisplay = displayCommands[i].display;
