@@ -107,11 +107,62 @@
         }
         
         feedbackDiv.innerHTML = feedbackHTML;
-        
-        // Check if user input matches any display command exactly
+             // Check if user input matches any display command (ignoring comments)
         var isCorrect = false;
         for (var i = 0; i < displayCommands.length; i++) {
-            if (userInput === displayCommands[i].display) {
+            var cmdDisplay = displayCommands[i].display;
+            // Extract everything before the first # (ignoring # in quotes)
+            var cmdWithoutComment = '';
+            var inSingleQuote = false;
+            var inDoubleQuote = false;
+            
+            for (var j = 0; j < cmdDisplay.length; j++) {
+                var char = cmdDisplay[j];
+                
+                // Handle quotes
+                if (char === "'" && !inDoubleQuote) {
+                    inSingleQuote = !inSingleQuote;
+                } else if (char === '"' && !inSingleQuote) {
+                    inDoubleQuote = !inDoubleQuote;
+                }
+                // Handle # only when not in quotes
+                else if (char === '#' && !inSingleQuote && !inDoubleQuote) {
+                    break;
+                }
+                
+                cmdWithoutComment += char;
+            }
+            
+            // Trim trailing whitespace from command
+            cmdWithoutComment = cmdWithoutComment.trim();
+            
+            // Do the same for user input
+            var userInputWithoutComment = '';
+            inSingleQuote = false;
+            inDoubleQuote = false;
+            
+            for (var j = 0; j < userInput.length; j++) {
+                var char = userInput[j];
+                
+                // Handle quotes
+                if (char === "'" && !inDoubleQuote) {
+                    inSingleQuote = !inSingleQuote;
+                } else if (char === '"' && !inSingleQuote) {
+                    inDoubleQuote = !inDoubleQuote;
+                }
+                // Handle # only when not in quotes
+                else if (char === '#' && !inSingleQuote && !inDoubleQuote) {
+                    break;
+                }
+                
+                userInputWithoutComment += char;
+            }
+            
+            // Trim trailing whitespace from user input
+            userInputWithoutComment = userInputWithoutComment.trim();
+            
+            // Compare the command parts (without comments)
+            if (userInputWithoutComment === cmdWithoutComment) {
                 isCorrect = true;
                 break;
             }
@@ -121,7 +172,7 @@
             typingField.classList.add('correct');
         } else {
             typingField.classList.remove('correct');
-        }
+        }   
     }
     
     typingField.addEventListener('input', updateFeedback);
