@@ -270,7 +270,9 @@ function castSpell(spellId) {
     updateCooldownDisplay(spellId, cooldown);
     
     // Apply global cooldown to all spells
-    applyGlobalCooldown();
+    if (spellId != 1){
+        applyGlobalCooldown();
+    }
 }
 
 // Update cast sequence display
