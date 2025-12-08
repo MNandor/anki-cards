@@ -181,7 +181,7 @@ function updateComboDisplay() {
         }
         
         // Show next unrevealed combo number (if any)
-        if (castSequence.length < comboSequence.length) {
+        if (castSequence.length < comboSequence.length && false) {
             var nextSpan = document.createElement('span');
             nextSpan.className = 'combo-number';
             nextSpan.textContent = getComboAtPosition(castSequence.length);
