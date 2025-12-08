@@ -3,6 +3,7 @@
         gap: 5px;
         margin: 10px 0;
         position: relative;
+				    justify-content: center;  /* Add this line */
     }
     
     .icon-wrapper {
