@@ -231,6 +231,10 @@ function updateCooldownDisplay(spellId, remaining) {
 function applyGlobalCooldown() {
     var gcd = getGlobalCooldown();
     for (var i = 0; i < spells.length; i++) {
+        // Skip spell 1 (skill 1)
+        if (spells[i].id === 1) {
+            continue;
+        }
         // Only apply GCD if it's longer than current cooldown
         if (activeCooldowns[i] < gcd) {
             activeCooldowns[i] = gcd;
