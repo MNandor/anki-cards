@@ -5,6 +5,14 @@
         position: relative;
 				    justify-content: center;  /* Add this line */
     }
+
+#combo-icons-container {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
     
     .icon-wrapper {
         position: relative;

@@ -1,0 +1,96 @@
+<h3>{{Front}}<br></h3>
+<!-- Back side of Anki card - Reusing same CSS as front -->
+<div id="combo-icons-container"></div>
+
+<!-- Hidden containers for parsing -->
+<div id="back-icons-source" class="hidden">{{Icons}}</div>
+<div id="back-combo-source" class="hidden">{{Combo}}</div>
+
+<script>
+// Initialize global variables
+var backSpells = [];
+var comboIcons = [];
+
+// Parse Icons for back side
+function parseBackIcons() {
+    var iconsSource = document.getElementById('back-icons-source');
+    var comboContainer = document.getElementById('combo-icons-container');
+    
+    // Get HTML content and extract img tags
+    var html = iconsSource.innerHTML;
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(html, 'text/html');
+    var images = doc.querySelectorAll('img');
+    
+    // Clear container
+    comboContainer.innerHTML = '';
+    
+    // Store all available icons by their number
+    var imageCount = images.length;
+    var startIndex = imageCount === 4 ? 2 : 1;
+    
+    for (var i = 0; i < images.length; i++) {
+        var img = images[i];
+        var spellId = startIndex + i;
+        
+        // Store the image for later use
+        backSpells[spellId] = img.cloneNode(true);
+        backSpells[spellId].style.width = '64px';
+        backSpells[spellId].style.height = '64px';
+        backSpells[spellId].style.borderRadius = '4px';
+    }
+}
+
+// Parse Combo for back side
+function parseBackCombo() {
+    var comboSource = document.getElementById('back-combo-source');
+    var text = comboSource.textContent || comboSource.innerText;
+    
+    // Extract numbers 1-5
+    var numbers = text.match(/[1-5]/g);
+    comboIcons = numbers ? numbers.map(function(n) { return parseInt(n); }) : [];
+}
+
+// Display combo icons
+function displayComboIcons() {
+    var comboContainer = document.getElementById('combo-icons-container');
+    comboContainer.innerHTML = '';
+    
+    for (var i = 0; i < comboIcons.length; i++) {
+        var spellId = comboIcons[i];
+        var img = backSpells[spellId];
+        
+        if (img) {
+            var wrapper = document.createElement('div');
+            wrapper.className = 'icon-wrapper';  // Using same class as front
+            wrapper.dataset.spellId = spellId;
+            
+            // Clone the image
+            var clonedImg = img.cloneNode(true);
+            
+            // Add number overlay (at bottom) - using same class as front
+            var numberSpan = document.createElement('span');
+            numberSpan.className = 'icon-number';  // Using same class as front
+            numberSpan.textContent = spellId.toString();
+            
+            wrapper.appendChild(clonedImg);
+            wrapper.appendChild(numberSpan);
+            comboContainer.appendChild(wrapper);
+        }
+    }
+}
+
+// Initialize back side
+function initBack() {
+    parseBackIcons();
+    parseBackCombo();
+    displayComboIcons();
+}
+
+// Initialize when DOM is loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initBack);
+} else {
+    initBack();
+}
+</script>
