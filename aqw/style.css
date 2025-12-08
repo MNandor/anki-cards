@@ -1,0 +1,105 @@
+    #icons-container {
+        display: flex;
+        gap: 5px;
+        margin: 10px 0;
+        position: relative;
+    }
+    
+    .icon-wrapper {
+        position: relative;
+        display: inline-block;
+        text-align: center;
+    }
+    
+    .icon-number {
+        position: absolute;
+        bottom: 30%;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-weight: bold;
+        font-size: 14px;
+        text-shadow: 
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+        pointer-events: none;
+        z-index: 2;
+        width: 20px;
+        text-align: center;
+    }
+    
+    .cooldown-overlay {
+        position: absolute;
+        top: 30%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        color: white;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 14px;
+        z-index: 1;
+        pointer-events: none;
+        padding-top: 5px;
+    }
+    
+    .cast-sequence {
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 4px;
+        min-height: 30px;
+        border: 1px solid #ddd;
+    }
+    
+    .combo-sequence {
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 4px;
+        min-height: 30px;
+        border: 1px solid #ddd;
+    }
+    
+    .cast-number {
+        display: inline-block;
+        margin: 0 3px;
+        padding: 4px 10px;
+        color: white;
+        border-radius: 4px;
+        font-weight: bold;
+        min-width: 24px;
+        text-align: center;
+    }
+    
+    .combo-number {
+        display: inline-block;
+        margin: 0 3px;
+        padding: 4px 10px;
+        color: white;
+        border-radius: 4px;
+        font-weight: bold;
+        min-width: 24px;
+        text-align: center;
+        background-color: #666;
+    }
+    
+    .hidden {
+        display: none !important;
+    }
+    
+    .cooldown-text {
+        font-size: 12px;
+        text-align: center;
+        margin-top: 2px;
+    }
+    
+    .correct {
+        background-color: #28a745 !important;
+    }
+    
+    .incorrect {
+        background-color: #dc3545 !important;
+    }

@@ -1,0 +1,352 @@
+<div id="icons-container"></div>
+<div class="cast-sequence" id="cast-sequence">Cast Sequence: <span id="sequence-placeholder">(none yet)</span></div>
+<div class="combo-sequence" id="combo-sequence">Target Combo: <span id="combo-placeholder"></span></div>
+
+<!-- Hidden containers for parsing -->
+<div id="icons-source" class="hidden">{{Icons}}</div>
+<div id="cooldowns-source" class="hidden">{{Cooldowns}}</div>
+<div id="haste-source" class="hidden">{{Haste}}</div>
+<div id="combo-source" class="hidden">{{Combo}}</div>
+
+<script>
+// Initialize global variables
+var spells = [];
+var originalCooldowns = [];
+var actualCooldowns = [];
+var activeCooldowns = [];
+var castSequence = [];
+var comboSequence = [];
+
+// Parse Icons
+function parseIcons() {
+    var iconsSource = document.getElementById('icons-source');
+    var iconsContainer = document.getElementById('icons-container');
+    
+    // Get HTML content and extract img tags
+    var html = iconsSource.innerHTML;
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(html, 'text/html');
+    var images = doc.querySelectorAll('img');
+    
+    // Clear container
+    iconsContainer.innerHTML = '';
+    
+    // Handle 4 or 5 images
+    var imageCount = images.length;
+    var startIndex = imageCount === 4 ? 2 : 1;
+    
+    for (var i = 0; i < images.length; i++) {
+        var img = images[i];
+        var wrapper = document.createElement('div');
+        wrapper.className = 'icon-wrapper';
+        wrapper.dataset.spellId = startIndex + i;
+        
+        // Clone the image
+        var clonedImg = img.cloneNode(true);
+        clonedImg.style.cursor = 'pointer';
+        clonedImg.style.width = '64px';
+        clonedImg.style.height = '64px';
+        clonedImg.style.borderRadius = '4px';
+        
+        // Add number overlay (at bottom)
+        var numberSpan = document.createElement('span');
+        numberSpan.className = 'icon-number';
+        numberSpan.textContent = (startIndex + i).toString();
+        
+        // Add cooldown overlay (at top)
+        var cooldownOverlay = document.createElement('div');
+        cooldownOverlay.className = 'cooldown-overlay hidden';
+        cooldownOverlay.textContent = '';
+        
+        // Add cooldown text below
+        var cooldownText = document.createElement('div');
+        cooldownText.className = 'cooldown-text';
+        cooldownText.textContent = 'Ready';
+        cooldownText.id = 'cooldown-text-' + (startIndex + i);
+        
+        wrapper.appendChild(clonedImg);
+        wrapper.appendChild(numberSpan);
+        wrapper.appendChild(cooldownOverlay);
+        wrapper.appendChild(cooldownText);
+        iconsContainer.appendChild(wrapper);
+        
+        // Store spell info
+        spells.push({
+            id: startIndex + i,
+            element: wrapper,
+            image: clonedImg,
+            cooldownOverlay: cooldownOverlay,
+            cooldownText: cooldownText,
+            isOnCooldown: false
+        });
+    }
+}
+
+// Parse Cooldowns
+function parseCooldowns() {
+    var cooldownsSource = document.getElementById('cooldowns-source');
+    var text = cooldownsSource.textContent || cooldownsSource.innerText;
+    
+    // Clean and parse numbers
+    text = text.replace(/<br\s*\/?>/gi, ' ').replace(/\n/g, ' ');
+    var numberStrings = text.split(/[\s,]+/).filter(function(n) { return n.trim() !== ''; });
+    
+    originalCooldowns = [];
+    
+    if (numberStrings.length >= 4 && numberStrings.length <= 5) {
+        for (var i = 0; i < numberStrings.length; i++) {
+            var parsed = parseFloat(numberStrings[i]);
+            originalCooldowns.push(isNaN(parsed) || parsed <= 0 ? 1 : parsed);
+        }
+    } else {
+        // Default to 1s for all
+        var imageCount = document.querySelectorAll('.icon-wrapper').length;
+        for (var j = 0; j < imageCount; j++) {
+            originalCooldowns.push(1);
+        }
+    }
+    
+    // If we have 4 cooldowns but 5 spells, insert default for spell 1
+    if (originalCooldowns.length === 4 && spells.length === 5) {
+        originalCooldowns.unshift(1);
+    }
+}
+
+// Parse Haste
+function parseHaste() {
+    var hasteSource = document.getElementById('haste-source');
+    var text = hasteSource.textContent || hasteSource.innerText;
+    
+    // Extract number (with optional % sign)
+    var match = text.match(/(\d+(?:\.\d+)?)/);
+    var haste = 0;
+    
+    if (match) {
+        haste = parseFloat(match[1]);
+        haste = Math.max(0, Math.min(50, haste)); // Clamp to 0-50
+    }
+    
+    return haste / 100; // Convert to decimal
+}
+
+// Parse Combo
+function parseCombo() {
+    var comboSource = document.getElementById('combo-source');
+    var text = comboSource.textContent || comboSource.innerText;
+    
+    // Extract numbers 1-5
+    var numbers = text.match(/[1-5]/g);
+    comboSequence = numbers ? numbers.map(function(n) { return parseInt(n); }) : [];
+    
+    // Update combo display
+    updateComboDisplay();
+}
+
+// Get combo number at position (repeats indefinitely)
+function getComboAtPosition(position) {
+    if (comboSequence.length === 0) return null;
+    return comboSequence[position % comboSequence.length];
+}
+
+// Update combo display
+function updateComboDisplay() {
+    var comboDiv = document.getElementById('combo-sequence');
+    var placeholder = document.getElementById('combo-placeholder');
+    
+    if (comboSequence.length === 0) {
+        placeholder.textContent = '(no combo specified)';
+        placeholder.style.color = '#666';
+        placeholder.style.fontStyle = 'italic';
+    } else {
+        placeholder.textContent = '';
+        placeholder.style.color = '';
+        placeholder.style.fontStyle = '';
+        
+        // Show revealed combo numbers (up to cast sequence length)
+        for (var i = 0; i < castSequence.length; i++) {
+            var comboNum = getComboAtPosition(i);
+            var castNum = castSequence[i];
+            var span = document.createElement('span');
+            span.className = 'combo-number';
+            span.textContent = comboNum;
+            
+            // Color based on match
+            if (comboNum === castNum) {
+                span.classList.add('correct');
+            } else {
+                span.classList.add('incorrect');
+            }
+            
+            placeholder.appendChild(span);
+        }
+        
+        // Show next unrevealed combo number (if any)
+        if (castSequence.length < comboSequence.length) {
+            var nextSpan = document.createElement('span');
+            nextSpan.className = 'combo-number';
+            nextSpan.textContent = getComboAtPosition(castSequence.length);
+            nextSpan.style.opacity = '0.7';
+            placeholder.appendChild(nextSpan);
+        }
+    }
+}
+
+// Apply haste to cooldowns
+function applyHaste(cooldowns, hasteReduction) {
+    var result = [];
+    for (var i = 0; i < cooldowns.length; i++) {
+        var reduced = cooldowns[i] * (1 - hasteReduction);
+        result.push(Math.max(0.1, reduced)); // Minimum 0.1s cooldown
+    }
+    return result;
+}
+
+// Update cooldown display
+function updateCooldownDisplay(spellId, remaining) {
+    var spell = null;
+    for (var i = 0; i < spells.length; i++) {
+        if (spells[i].id === spellId) {
+            spell = spells[i];
+            break;
+        }
+    }
+    if (!spell) return;
+    
+    if (remaining > 0) {
+        spell.isOnCooldown = true;
+        spell.cooldownOverlay.textContent = remaining.toFixed(1);
+        spell.cooldownOverlay.classList.remove('hidden');
+        spell.cooldownText.textContent = remaining.toFixed(1) + 's';
+        spell.image.style.opacity = '0.5';
+    } else {
+        spell.isOnCooldown = false;
+        spell.cooldownOverlay.classList.add('hidden');
+        spell.cooldownText.textContent = 'Ready';
+        spell.image.style.opacity = '1';
+    }
+}
+
+// Cast a spell
+function castSpell(spellId) {
+    var spellIndex = -1;
+    for (var i = 0; i < spells.length; i++) {
+        if (spells[i].id === spellId) {
+            spellIndex = i;
+            break;
+        }
+    }
+    if (spellIndex === -1) return;
+    
+    var spell = spells[spellIndex];
+    
+    // Check if spell is on cooldown
+    if (spell.isOnCooldown) return;
+    
+    // Record cast
+    castSequence.push(spellId);
+    updateCastSequenceDisplay();
+    updateComboDisplay();
+    
+    // Start cooldown
+    var cooldown = actualCooldowns[spellIndex];
+    activeCooldowns[spellIndex] = cooldown;
+    updateCooldownDisplay(spellId, cooldown);
+}
+
+// Update cast sequence display
+function updateCastSequenceDisplay() {
+    var sequenceDiv = document.getElementById('cast-sequence');
+    var placeholder = document.getElementById('sequence-placeholder');
+    
+    if (castSequence.length === 0) {
+        placeholder.textContent = '(none yet)';
+        placeholder.style.color = '#666';
+        placeholder.style.fontStyle = 'italic';
+    } else {
+        placeholder.textContent = '';
+        placeholder.style.color = '';
+        placeholder.style.fontStyle = '';
+        
+        for (var i = 0; i < castSequence.length; i++) {
+            var span = document.createElement('span');
+            span.className = 'cast-number';
+            span.textContent = castSequence[i];
+            
+            // Color based on combo match
+            var comboNum = getComboAtPosition(i);
+            if (comboNum !== null) {
+                if (comboNum === castSequence[i]) {
+                    span.classList.add('correct');
+                } else {
+                    span.classList.add('incorrect');
+                }
+            } else {
+                span.style.backgroundColor = '#007bff'; // Blue if no combo
+            }
+            
+            placeholder.appendChild(span);
+        }
+    }
+}
+
+// Cooldown timer
+function updateCooldowns() {
+    for (var i = 0; i < spells.length; i++) {
+        if (activeCooldowns[i] > 0) {
+            activeCooldowns[i] -= 0.1; // Update every 100ms
+            if (activeCooldowns[i] < 0) {
+                activeCooldowns[i] = 0;
+            }
+            updateCooldownDisplay(spells[i].id, activeCooldowns[i]);
+        }
+    }
+}
+
+// Initialize everything
+function init() {
+    // Parse all data
+    parseIcons();
+    parseCooldowns();
+    var haste = parseHaste();
+    parseCombo();
+    
+    // Apply haste
+    actualCooldowns = applyHaste(originalCooldowns, haste);
+    activeCooldowns = [];
+    for (var i = 0; i < spells.length; i++) {
+        activeCooldowns.push(0);
+    }
+    
+    // Add click event listeners
+    for (var j = 0; j < spells.length; j++) {
+        (function(index) {
+            spells[index].element.addEventListener('click', function() {
+                castSpell(spells[index].id);
+            });
+        })(j);
+    }
+    
+    // Add keyboard event listeners
+    document.addEventListener('keydown', function(event) {
+        var key = event.key;
+        if (key >= '1' && key <= '5') {
+            var spellId = parseInt(key);
+            castSpell(spellId);
+        }
+    });
+    
+    // Start cooldown timer
+    setInterval(updateCooldowns, 100);
+    
+    // Update displays
+    updateCastSequenceDisplay();
+    updateComboDisplay();
+}
+
+// Initialize when DOM is loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
+</script>
